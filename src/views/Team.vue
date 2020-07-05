@@ -19,10 +19,11 @@
             <b-dropdown-item @click="showID ^= 1">{{
               showID ? '隐藏序号' : '显示序号'
             }}</b-dropdown-item>
+            <b-dropdown-item @click="onToggleAction">隐藏操作</b-dropdown-item>
+            <hr class="dropdown-divider" />
             <b-dropdown-item @click="onXLorPasteImport"
               >从 XLorPaste 批量添加</b-dropdown-item
             >
-            <b-dropdown-item @click="onToggleAction">隐藏操作</b-dropdown-item>
             <b-dropdown-item @click="onRefresh">刷新信息</b-dropdown-item>
             <b-dropdown-item @click="onClear">清空存储</b-dropdown-item>
           </b-dropdown>
