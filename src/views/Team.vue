@@ -33,10 +33,16 @@
       </div>
       <div class="level-right">
         <div class="level-item">
-          <b-button type="is-success" icon-left="plus" @click="addHanlde" />
+          <b-button
+            :disabled="current !== null"
+            type="is-success"
+            icon-left="plus"
+            @click="addHanlde"
+          />
         </div>
         <div class="level-item">
           <b-upload
+            :disabled="current !== null"
             v-model="file"
             drag-drop
             accept=".csv"
