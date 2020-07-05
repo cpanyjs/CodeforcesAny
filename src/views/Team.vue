@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <div v-if="current !== null">
+    <div v-if="current !== null" style="margin-bottom: 1rem;">
       <b-progress type="is-success" show-value format="percent" :value="percent"
         >{{ current }} - {{ percent }} %</b-progress
       >
