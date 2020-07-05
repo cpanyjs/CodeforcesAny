@@ -8,8 +8,7 @@
             @click="isFullScreen = true"
             type="is-primary"
             icon-left="fullscreen"
-            >全屏</b-button
-          >
+          ></b-button>
         </div>
         <div class="level-item">
           <b-switch
@@ -24,7 +23,7 @@
       </div>
       <div class="level-right">
         <div class="level-item">
-          <b-button type="is-success" icon-left="plus" />
+          <b-button type="is-success" icon-left="plus" @click="addHanlde" />
         </div>
         <div class="level-item">
           <b-upload
@@ -65,6 +64,7 @@
 
 <script>
 import HandleTable from '../components/handleTable';
+import AddHandleForm from '../components/addHandle';
 import { sleep } from '../utils';
 
 export default {
@@ -122,6 +122,14 @@ export default {
       this.current = '完成';
       this.file = null;
       setTimeout(() => (this.current = null), 3000);
+    },
+    addHanlde() {
+      this.$buefy.modal.open({
+        parent: this,
+        component: AddHandleForm,
+        hasModalCard: true,
+        trapFocus: true
+      });
     }
   }
 };

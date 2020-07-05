@@ -37,6 +37,7 @@ export default new Vuex.Store({
       { commit },
       { name, handle }: { name: string; handle: string }
     ) {
+      console.log(name, handle);
       const result = await addHandle(name, handle);
       if (result) {
         commit('pushHandle', result[0]);
