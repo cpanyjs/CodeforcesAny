@@ -1,7 +1,7 @@
 <template>
   <b-table
     :data="source"
-    :columns="source.length === 0 ? columns : []"
+    :columns="source.length === 0 ? columns : undefined"
     default-sort="rating"
     default-sort-direction="desc"
   >
