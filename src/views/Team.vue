@@ -59,7 +59,7 @@
 
     <component
       :is="tableComponent"
-      :source="tableSource"
+      :source="tableSource | transform"
       :showAction="showActionBar && mode === 'Handle'"
     ></component>
 
@@ -79,6 +79,7 @@
 import HandleTable from '../components/handleTable';
 import AddHandleForm from '../components/addHandle';
 import { sleep } from '../utils';
+import { filterAC } from '../codeforces/utils';
 
 export default {
   name: 'Team',
@@ -124,6 +125,9 @@ export default {
         .split('\n')
         .map(s => s.split(',').map(s => s.trim()))
         .filter(s => s.length === 2);
+      this.multiAddHandles(data);
+    },
+    async multiAddHandles(data) {
       this.mode = 'Handle';
       this.percent = 0;
       let cnt = 0;
@@ -172,6 +176,19 @@ export default {
           await this.$store.dispatch('clearAll');
           this.$buefy.toast.open('清空完成!');
         }
+      });
+    }
+  },
+  filters: {
+    transform(data) {
+      return data.map(user => {
+        return {
+          name: user.name,
+          handle: user.handle,
+          rating: user.rating,
+          maxRating: user.maxRating,
+          acNum: filterAC(user.submissions).length
+        };
       });
     }
   },

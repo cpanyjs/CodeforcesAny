@@ -20,7 +20,7 @@
           {{ props.row.name }}
         </span>
       </b-table-column>
-      <b-table-column field="rating" label="Rating" numeric sortable="">
+      <b-table-column field="rating" label="Rating" numeric sortable>
         <span
           :style="props.row.rating | rankColor"
           class="has-text-weight-bold"
@@ -28,12 +28,22 @@
           {{ props.row.rating }}
         </span>
       </b-table-column>
-      <b-table-column field="maxRating" label="历史最高 Rating" numeric>
+      <b-table-column
+        field="maxRating"
+        label="历史最高 Rating"
+        numeric
+        sortable
+      >
         <span
           :style="props.row.maxRating | rankColor"
           class="has-text-weight-bold"
         >
           {{ props.row.maxRating }}
+        </span>
+      </b-table-column>
+      <b-table-column field="acNum" label="题数" numeric sortable>
+        <span>
+          {{ props.row.acNum }}
         </span>
       </b-table-column>
       <b-table-column label="操作" :visible="showAction" centered>
