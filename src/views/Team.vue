@@ -154,7 +154,7 @@ export default {
       }
       this.current = '完成';
       this.file = null;
-      setTimeout(() => (this.current = null), 3000);
+      setTimeout(() => (this.current = null), 2000);
     },
     addHanlde() {
       window.removeEventListener('keypress', this.onToggleAction);
