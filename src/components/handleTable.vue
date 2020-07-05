@@ -36,6 +36,9 @@
           {{ props.row.maxRating }}
         </span>
       </b-table-column>
+      <b-table-column label="操作" :visible="showAction" centered>
+        <b-button icon-left="delete" type="is-danger"></b-button>
+      </b-table-column>
     </template>
 
     <template slot="empty">
@@ -55,7 +58,8 @@
 export default {
   name: 'HandleTable',
   props: {
-    source: Array
+    source: Array,
+    showAction: Boolean
   },
   data: () => ({
     columns: [

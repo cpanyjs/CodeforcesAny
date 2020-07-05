@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="level">
+    <div v-show="showActionBar" class="level">
       <div class="level-left">
         <div class="level-item">
           <b-button
@@ -57,11 +57,19 @@
       >
     </div>
 
-    <component :is="tableComponent" :source="tableSource"></component>
+    <component
+      :is="tableComponent"
+      :source="tableSource"
+      :showAction="showActionBar"
+    ></component>
 
     <b-modal :active.sync="isFullScreen" full-screen can-cancel destroy-on-hide>
       <div style="padding: 2rem 2rem">
-        <component :is="tableComponent" :source="tableSource"></component>
+        <component
+          :is="tableComponent"
+          :source="tableSource"
+          :showAction="false"
+        ></component>
       </div>
     </b-modal>
   </div>
@@ -75,6 +83,7 @@ import { sleep } from '../utils';
 export default {
   name: 'Team',
   data: () => ({
+    showActionBar: true,
     mode: 'Handle',
     file: null,
     percent: -1,
@@ -146,7 +155,7 @@ export default {
       });
     },
     onToggleAction() {
-      console.log('Toggle');
+      this.showActionBar ^= 1;
     },
     onRefresh() {
       console.log('Refresh');
@@ -165,6 +174,12 @@ export default {
         }
       });
     }
+  },
+  created() {
+    window.addEventListener('keypress', this.onToggleAction);
+  },
+  destroyed() {
+    window.removeEventListener('keypress', this.onToggleAction);
   }
 };
 </script>
