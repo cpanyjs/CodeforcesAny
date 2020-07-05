@@ -1,5 +1,10 @@
 <template>
-  <b-table :data="source" default-sort="rating" default-sort-direction="desc">
+  <b-table
+    :data="source"
+    :columns="source.length === 0 ? columns : []"
+    default-sort="rating"
+    default-sort-direction="desc"
+  >
     <template slot-scope="props">
       <b-table-column label="Handle">
         <a
@@ -52,7 +57,28 @@ export default {
   props: {
     source: Array
   },
-  data: () => ({})
+  data: () => ({
+    columns: [
+      {
+        field: 'handle',
+        label: 'Handle'
+      },
+      {
+        field: 'name',
+        label: '姓名'
+      },
+      {
+        field: 'rating',
+        label: 'Rating',
+        numeric: true
+      },
+      {
+        field: 'maxRating',
+        label: '历史最高 Rating',
+        numeric: true
+      }
+    ]
+  })
 };
 </script>
 
