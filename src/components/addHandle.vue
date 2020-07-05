@@ -4,6 +4,9 @@
       <p class="modal-card-title">添加 Codeforces 账户</p>
     </header>
     <section class="modal-card-body">
+      <b-notification v-if="notificationText.length > 0" type="is-danger">
+        {{ notificationText }}
+      </b-notification>
       <b-field label="姓名">
         <b-input type="text" v-model="name" required></b-input>
       </b-field>
@@ -25,15 +28,23 @@ export default {
   name: 'AddHandle',
   data: () => ({
     name: '',
-    handle: ''
+    handle: '',
+    notificationText: ''
   }),
   methods: {
     async onSubmit() {
-      await this.$store.dispatch('addHandle', {
-        name: this.name,
-        handle: this.handle
-      });
-      this.$parent.close();
+      this.notificationText = '';
+      try {
+        await this.$store.dispatch('addHandle', {
+          name: this.name,
+          handle: this.handle
+        });
+        this.$parent.close();
+      } catch (err) {
+        this.name = '';
+        this.handle = '';
+        this.notificationText = '添加失败！请检查 Handle 是否填写正确。';
+      }
     }
   }
 };

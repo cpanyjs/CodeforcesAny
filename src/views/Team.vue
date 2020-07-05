@@ -11,7 +11,7 @@
           ></b-button>
         </div>
         <div class="level-item">
-          <b-dropdown hoverable>
+          <b-dropdown hoverable :disabled="current !== null">
             <button class="button is-info" slot="trigger">
               <span>更多操作</span>
               <b-icon icon="menu-down"></b-icon>
@@ -120,7 +120,16 @@ export default {
       let cnt = 0;
       for (const [name, handle] of data) {
         this.current = '正在查询 ' + handle;
-        await this.$store.dispatch('addHandle', { name, handle });
+        try {
+          await this.$store.dispatch('addHandle', { name, handle });
+        } catch (err) {
+          this.$buefy.snackbar.open({
+            message: `${handle} 查询失败！`,
+            type: 'is-danger',
+            queue: false,
+            indefinite: true
+          });
+        }
         this.percent = Number(((++cnt / data.length) * 100.0).toFixed(2));
         await sleep(500);
       }
