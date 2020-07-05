@@ -8,10 +8,20 @@
         {{ notificationText }}
       </b-notification>
       <b-field label="姓名">
-        <b-input type="text" v-model="name" required></b-input>
+        <b-input
+          type="text"
+          v-model="name"
+          @keypress.enter="onSubmit"
+          required
+        ></b-input>
       </b-field>
       <b-field label="Handle">
-        <b-input type="text" v-model="handle" required></b-input>
+        <b-input
+          type="text"
+          v-model="handle"
+          @keypress.enter="onSubmit"
+          required
+        ></b-input>
       </b-field>
     </section>
     <footer class="modal-card-foot">

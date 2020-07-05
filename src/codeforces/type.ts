@@ -10,6 +10,7 @@ export interface HandleDTO {
 export type UserDTO = HandleDTO & {
   name: string;
   submissions: SubmissionDTO[];
+  ratingChanges: RatingChangeDTO[];
 };
 
 export enum Verdict {
@@ -54,6 +55,15 @@ export interface SubmissionDTO {
   };
   programmingLanguage: string;
   verdict: Verdict;
+}
+
+export interface RatingChangeDTO {
+  contestId: number;
+  contestName: string;
+  handle: string;
+  rank: number;
+  oldRating: number;
+  newRating: number;
 }
 
 export interface ContestDTO {

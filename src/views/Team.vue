@@ -85,7 +85,7 @@
 import HandleTable from '../components/handleTable';
 import AddHandleForm from '../components/addHandle';
 import { sleep } from '../utils';
-import { filterAC } from '../codeforces/utils';
+import { filterAC, filterContest } from '../codeforces/utils';
 
 export default {
   name: 'Team',
@@ -157,11 +157,13 @@ export default {
       setTimeout(() => (this.current = null), 3000);
     },
     addHanlde() {
+      window.removeEventListener('keypress', this.onToggleAction);
       this.$buefy.modal.open({
         parent: this,
         component: AddHandleForm,
         hasModalCard: true,
-        trapFocus: true
+        trapFocus: true,
+        onCancel: () => window.addEventListener('keypress', this.onToggleAction)
       });
     },
     onToggleAction() {
@@ -193,7 +195,8 @@ export default {
           handle: user.handle,
           rating: user.rating,
           maxRating: user.maxRating,
-          acNum: filterAC(user.submissions).length
+          acNum: filterAC(user.submissions).length,
+          contestNum: filterContest(user.ratingChanges).length
         };
       });
     }

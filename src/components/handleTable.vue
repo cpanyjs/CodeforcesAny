@@ -46,6 +46,11 @@
           {{ props.row.acNum }}
         </span>
       </b-table-column>
+      <b-table-column field="contestNum" label="参加比赛数" numeric sortable>
+        <span>
+          {{ props.row.contestNum }}
+        </span>
+      </b-table-column>
       <b-table-column label="操作" :visible="showAction" centered>
         <b-button icon-left="delete" type="is-danger"></b-button>
       </b-table-column>
@@ -89,6 +94,16 @@ export default {
       {
         field: 'maxRating',
         label: '历史最高 Rating',
+        numeric: true
+      },
+      {
+        field: 'acNum',
+        label: '题数',
+        numeric: true
+      },
+      {
+        field: 'contestNum',
+        label: '参加比赛数',
         numeric: true
       }
     ]

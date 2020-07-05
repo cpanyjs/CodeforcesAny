@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-import { HandleDTO, UserDTO, SubmissionDTO, ContestDTO } from './type';
+import {
+  HandleDTO,
+  UserDTO,
+  SubmissionDTO,
+  ContestDTO,
+  RatingChangeDTO
+} from './type';
 
 const api = axios.create({
   baseURL: 'https://codeforces.com/api/',
@@ -31,15 +37,30 @@ export async function getUserStatus(handle: string): Promise<SubmissionDTO[]> {
   return result as SubmissionDTO[];
 }
 
+export async function getUserRating(
+  handle: string
+): Promise<RatingChangeDTO[]> {
+  const {
+    data: { result }
+  } = await api.get('user.rating', {
+    params: {
+      handle: handle
+    }
+  });
+  return result as RatingChangeDTO[];
+}
+
 export async function getUser(handle: string, name: string): Promise<UserDTO> {
-  const [info, submissions] = await Promise.all([
+  const [info, submissions, ratingChanges] = await Promise.all([
     getUserInfo(handle),
-    getUserStatus(handle)
+    getUserStatus(handle),
+    getUserRating(handle)
   ]);
   return {
     ...info,
     name,
-    submissions
+    submissions,
+    ratingChanges
   };
 }
 
