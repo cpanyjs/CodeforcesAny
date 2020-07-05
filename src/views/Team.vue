@@ -16,6 +16,9 @@
               <span>更多操作</span>
               <b-icon icon="menu-down"></b-icon>
             </button>
+            <b-dropdown-item @click="showID ^= 1">{{
+              showID ? '隐藏序号' : '显示序号'
+            }}</b-dropdown-item>
             <b-dropdown-item @click="onXLorPasteImport"
               >从 XLorPaste 批量添加</b-dropdown-item
             >
@@ -70,14 +73,16 @@
       :is="tableComponent"
       :source="tableSource | transform"
       :showAction="showActionBar && mode === 'Handle'"
+      :showID="showID"
     ></component>
 
     <b-modal :active.sync="isFullScreen" full-screen can-cancel destroy-on-hide>
       <div style="padding: 2rem 2rem">
         <component
           :is="tableComponent"
-          :source="tableSource"
+          :source="tableSource | transform"
           :showAction="false"
+          :showID="showID"
         ></component>
       </div>
     </b-modal>
@@ -100,6 +105,7 @@ function parseCSV(text) {
 export default {
   name: 'Team',
   data: () => ({
+    showID: true,
     showActionBar: true,
     mode: 'Handle',
     file: null,

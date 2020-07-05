@@ -6,6 +6,11 @@
     default-sort-direction="desc"
   >
     <template slot-scope="props">
+      <b-table-column label="ID" numeric :visible="showID">
+        <span class="has-text-weight-bold">
+          {{ props.index + 1 }}
+        </span>
+      </b-table-column>
       <b-table-column label="Handle">
         <a
           :href="'http://codeforces.com/profile/' + props.row.handle"
@@ -52,7 +57,11 @@
         </span>
       </b-table-column>
       <b-table-column label="操作" :visible="showAction" centered>
-        <b-button icon-left="delete" type="is-danger"></b-button>
+        <b-button
+          size="is-small"
+          icon-left="delete"
+          type="is-danger"
+        ></b-button>
       </b-table-column>
     </template>
 
@@ -74,6 +83,7 @@ export default {
   name: 'HandleTable',
   props: {
     source: Array,
+    showID: Boolean,
     showAction: Boolean
   },
   data: () => ({
