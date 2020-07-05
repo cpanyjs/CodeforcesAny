@@ -32,9 +32,7 @@ export class Member {
       this.maxRating = member.maxRating;
       this.maxRank = member.maxRank;
     }
-    for (const sub of member.submissions) {
-      this.submissions.push(sub);
-    }
+    this.submissions.push(...member.submissions);
     this.submissions.sort((lhs: SubmissionDTO, rhs: SubmissionDTO) => {
       if (lhs.id === rhs.id) {
         return 0;
