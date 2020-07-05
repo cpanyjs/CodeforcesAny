@@ -60,7 +60,7 @@
     <component
       :is="tableComponent"
       :source="tableSource"
-      :showAction="showActionBar"
+      :showAction="showActionBar && mode === 'Handle'"
     ></component>
 
     <b-modal :active.sync="isFullScreen" full-screen can-cancel destroy-on-hide>
