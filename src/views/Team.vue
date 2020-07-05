@@ -181,22 +181,32 @@ export default {
       });
     },
     onXLorPasteImport() {
+      window.removeEventListener('keypress', this.onToggleAction);
+      const result = /xlorpaste=([a-z0-9]{6})/.exec(document.cookie);
+      const token = result ? result[1] : '';
       this.$buefy.dialog.prompt({
         message: `XLorPaste Token？`,
         inputAttrs: {
           placeholder: '',
-          maxlength: 6
+          maxlength: 6,
+          value: token
         },
         confirmText: '导入',
         cancelText: '取消',
         trapFocus: true,
         onConfirm: async token => {
-          const data = parseCSV(
-            await (
-              await fetch(`https://api.xlorpaste.cn/${token}?raw=true`)
-            ).text()
-          );
-          this.multiAddHandles(data);
+          document.cookie =
+            'xlorpaste=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT';
+          try {
+            const data = parseCSV(
+              await (
+                await fetch(`https://api.xlorpaste.cn/${token}?raw=true`)
+              ).text()
+            );
+            this.multiAddHandles(data);
+          } finally {
+            window.addEventListener('keypress', this.onToggleAction);
+          }
         }
       });
     },
