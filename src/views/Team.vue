@@ -16,6 +16,9 @@
               <span>更多操作</span>
               <b-icon icon="menu-down"></b-icon>
             </button>
+            <b-dropdown-item @click="onXLorPasteImport"
+              >从 XLorPaste 批量添加</b-dropdown-item
+            >
             <b-dropdown-item @click="onToggleAction">隐藏操作</b-dropdown-item>
             <b-dropdown-item @click="onRefresh">刷新信息</b-dropdown-item>
             <b-dropdown-item @click="onClear">清空存储</b-dropdown-item>
@@ -87,6 +90,13 @@ import AddHandleForm from '../components/addHandle';
 import { sleep } from '../utils';
 import { filterAC, filterContest } from '../codeforces/utils';
 
+function parseCSV(text) {
+  return text
+    .split('\n')
+    .map(s => s.split(',').map(s => s.trim()))
+    .filter(s => s.length === 2);
+}
+
 export default {
   name: 'Team',
   data: () => ({
@@ -119,7 +129,7 @@ export default {
   },
   methods: {
     async onFileUpload(file) {
-      const data = (
+      const data = parseCSV(
         await new Promise(res => {
           const reader = new FileReader();
           reader.readAsText(file, 'utf-8');
@@ -127,10 +137,7 @@ export default {
             res(e.target.result);
           });
         })
-      )
-        .split('\n')
-        .map(s => s.split(',').map(s => s.trim()))
-        .filter(s => s.length === 2);
+      );
       this.multiAddHandles(data);
     },
     async multiAddHandles(data) {
@@ -164,6 +171,26 @@ export default {
         hasModalCard: true,
         trapFocus: true,
         onCancel: () => window.addEventListener('keypress', this.onToggleAction)
+      });
+    },
+    onXLorPasteImport() {
+      this.$buefy.dialog.prompt({
+        message: `XLorPaste Token？`,
+        inputAttrs: {
+          placeholder: '',
+          maxlength: 6
+        },
+        confirmText: '导入',
+        cancelText: '取消',
+        trapFocus: true,
+        onConfirm: async token => {
+          const data = parseCSV(
+            await (
+              await fetch(`https://api.xlorpaste.cn/${token}?raw=true`)
+            ).text()
+          );
+          this.multiAddHandles(data);
+        }
       });
     },
     onToggleAction() {
