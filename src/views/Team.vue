@@ -11,14 +11,24 @@
           ></b-button>
         </div>
         <div class="level-item">
+          <b-dropdown hoverable>
+            <button class="button is-info" slot="trigger">
+              <span>更多操作</span>
+              <b-icon icon="menu-down"></b-icon>
+            </button>
+            <b-dropdown-item @click="onToggleAction">隐藏操作</b-dropdown-item>
+            <b-dropdown-item @click="onRefresh">刷新信息</b-dropdown-item>
+            <b-dropdown-item @click="onClear">清空存储</b-dropdown-item>
+          </b-dropdown>
+        </div>
+        <div class="level-item">
           <b-switch
             :disabled="current !== null"
             v-model="mode"
             true-value="Member"
             false-value="Handle"
+            >{{ mode === 'Member' ? '成员模式' : '账户模式' }}</b-switch
           >
-            {{ mode === 'Member' ? '成员模式' : '账户模式' }}
-          </b-switch>
         </div>
       </div>
       <div class="level-right">
@@ -42,14 +52,9 @@
     </div>
 
     <div v-if="current !== null">
-      <b-progress
-        type="is-success"
-        show-value
-        format="percent"
-        :value="percent"
+      <b-progress type="is-success" show-value format="percent" :value="percent"
+        >{{ current }} - {{ percent }} %</b-progress
       >
-        {{ current }} - {{ percent }} %
-      </b-progress>
     </div>
 
     <component :is="tableComponent" :source="tableSource"></component>
@@ -129,6 +134,26 @@ export default {
         component: AddHandleForm,
         hasModalCard: true,
         trapFocus: true
+      });
+    },
+    onToggleAction() {
+      console.log('Toggle');
+    },
+    onRefresh() {
+      console.log('Refresh');
+    },
+    onClear() {
+      this.$buefy.dialog.confirm({
+        title: '清空存储',
+        message: '请问确认 <b>清空</b> 所有存储的数据？',
+        confirmText: '清空',
+        cancelText: '取消',
+        type: 'is-danger',
+        hasIcon: false,
+        onConfirm: async () => {
+          await this.$store.dispatch('clearAll');
+          this.$buefy.toast.open('清空完成!');
+        }
       });
     }
   }

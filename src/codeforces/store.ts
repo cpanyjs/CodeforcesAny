@@ -29,6 +29,11 @@ export async function loadDB() {
   return [handles, members];
 }
 
+export async function clearDB() {
+  await handleStore.clear();
+  memberStore.clear();
+}
+
 export async function addHandle(
   name: string,
   handle: string

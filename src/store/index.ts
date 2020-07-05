@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import { UserDTO, HandleDTO } from '../codeforces/type';
-import { addHandle } from '../codeforces/store';
+import { addHandle, clearDB } from '../codeforces/store';
 import { Member } from '@/codeforces/member';
 
 Vue.use(Vuex);
@@ -30,6 +30,10 @@ export default new Vuex.Store({
       } else {
         state.members.splice(id, 1, member);
       }
+    },
+    clearAllSync(state) {
+      state.handles.splice(0);
+      state.members.splice(0);
     }
   },
   actions: {
@@ -37,12 +41,15 @@ export default new Vuex.Store({
       { commit },
       { name, handle }: { name: string; handle: string }
     ) {
-      console.log(name, handle);
       const result = await addHandle(name, handle);
       if (result) {
         commit('pushHandle', result[0]);
         commit('updateMember', result[1]);
       }
+    },
+    async clearAll({ commit }) {
+      await clearDB();
+      commit('clearAllSync');
     }
   },
   modules: {}
