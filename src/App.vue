@@ -1,32 +1,38 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <NavBar />
+    <section class="section">
+      <b-loading :active.sync="$root.loading"></b-loading>
+      <router-view v-if="!$root.loading" />
+    </section>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import NavBar from './components/NavBar';
 
-#nav {
-  padding: 30px;
-}
+export default {
+  name: 'App',
+  components: {
+    NavBar
+  }
+};
+</script>
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+<style lang="scss">
+@import '~bulma/sass/utilities/_all';
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+$primary: $turquoise;
+$primary-invert: findColorInvert($primary);
+
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+$navbar-padding-vertical: 0.5rem;
+
+$section-padding: 2rem 2rem;
+
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 </style>
