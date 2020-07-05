@@ -18,7 +18,7 @@ export class Member {
     this.rating = data.rating;
     this.maxRank = data.maxRank;
     this.maxRating = data.maxRating;
-    this.submissions = data.submissions;
+    this.submissions = [...data.submissions];
   }
 
   merge(member: Member) {
