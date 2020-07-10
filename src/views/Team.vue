@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="team">
     <div v-show="showActionBar" class="level">
       <div class="level-left">
         <div class="level-item">
@@ -179,17 +179,14 @@ export default {
       setTimeout(() => (this.current = null), 2000);
     },
     addHanlde() {
-      window.removeEventListener('keypress', this.onToggleAction);
       this.$buefy.modal.open({
         parent: this,
         component: AddHandleForm,
         hasModalCard: true,
-        trapFocus: true,
-        onCancel: () => window.addEventListener('keypress', this.onToggleAction)
+        trapFocus: true
       });
     },
     onXLorPasteImport() {
-      window.removeEventListener('keypress', this.onToggleAction);
       const result = /xlorpaste=([a-z0-9]{6})/.exec(document.cookie);
       const token = result ? result[1] : '';
       this.$buefy.dialog.prompt({
@@ -212,19 +209,28 @@ export default {
               ).text()
             );
             this.multiAddHandles(data);
-          } finally {
-            window.addEventListener('keypress', this.onToggleAction);
+          } catch (err) {
+            this.$buefy.snackbar.open({
+              message: `${token} 导入失败！`,
+              type: 'is-danger',
+              queue: false,
+              indefinite: true
+            });
           }
         }
       });
     },
     onToggleAction() {
-      this.showActionBar ^= 1;
-      if (!this.showActionBar) {
+      if (this.showActionBar) {
+        this.showActionBar = false;
+        window.addEventListener('keypress', this.onToggleAction);
         this.$buefy.toast.open({
-          message: '按任意键显示所有操作',
+          message: '按任意键显示操作',
           type: 'is-info'
         });
+      } else {
+        this.showActionBar = true;
+        window.removeEventListener('keypress', this.onToggleAction);
       }
     },
     async onRefresh() {
@@ -260,12 +266,6 @@ export default {
         };
       });
     }
-  },
-  created() {
-    window.addEventListener('keypress', this.onToggleAction);
-  },
-  destroyed() {
-    window.removeEventListener('keypress', this.onToggleAction);
   }
 };
 </script>
