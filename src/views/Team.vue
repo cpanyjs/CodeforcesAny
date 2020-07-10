@@ -116,7 +116,7 @@ export default {
   data: () => ({
     showID: true,
     showActionBar: true,
-    mode: 'Handle',
+    mode: 'Member',
     file: null,
     percent: -1,
     current: null,
