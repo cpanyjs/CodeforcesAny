@@ -48,18 +48,26 @@
           />
         </div>
         <div class="level-item">
-          <b-upload
-            :disabled="current !== null"
-            v-model="file"
-            drag-drop
-            accept=".csv"
-            @input="onFileUpload"
+          <b-tooltip
+            label="上传一个 csv 文件，每行包含 <姓名>,<handle>"
+            multilined
+            size="is-small"
+            position="is-top"
+            type="is-success"
           >
-            <a class="button is-success">
-              <b-icon icon="upload"></b-icon>
-              <span>批量添加</span>
-            </a>
-          </b-upload>
+            <b-upload
+              :disabled="current !== null"
+              v-model="file"
+              drag-drop
+              accept=".csv"
+              @input="onFileUpload"
+            >
+              <a class="button is-success">
+                <b-icon icon="upload"></b-icon>
+                <span>批量添加</span>
+              </a>
+            </b-upload>
+          </b-tooltip>
         </div>
       </div>
     </div>
@@ -212,6 +220,12 @@ export default {
     },
     onToggleAction() {
       this.showActionBar ^= 1;
+      if (!this.showActionBar) {
+        this.$buefy.toast.open({
+          message: '按任意键显示所有操作',
+          type: 'is-info'
+        });
+      }
     },
     async onRefresh() {
       const data = this.$store.getters.allNameHandle;
