@@ -12,6 +12,18 @@
       </div>
     </h2>
     <div class="card-content">
+      <div v-if="name" class="columns">
+        <div class="column">
+          Codeforces 账号：
+          <span v-for="handle in profile.handles" :key="handle.handle">
+            <CodeforcesHandle
+              :handle="handle.handle"
+              :rating="handle.rating"
+            ></CodeforcesHandle>
+          </span>
+          。
+        </div>
+      </div>
       <div class="columns">
         <div class="column is-half">
           <h3 class="is-size-4 has-text-weight-bold">正确率</h3>
@@ -52,7 +64,7 @@ export default {
     if (!this.profile) {
       this.$router.replace({ name: 'Home' });
     }
-
+    console.log(this.profile);
     this.$nextTick(() => {
       new Pie(this.$refs.verdict, this.profile.analyzeVerdict(), {
         innerRadius: 0.5,

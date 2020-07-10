@@ -53,27 +53,14 @@ export class Member {
       this.maxRating = member.maxRating;
       this.maxRank = member.maxRank;
     }
-    this.handles.push({
-      handle: member.handle,
-      rating: member.rating,
-      rank: member.rank,
-      maxRating: member.maxRating,
-      maxRank: member.maxRank
-    });
+
     this.submissions.push(...member.submissions);
     this.ratingChanges.push(...member.ratingChanges);
-    this.submissions.sort(
-      (lhs: SubmissionDTO, rhs: SubmissionDTO) => lhs.id - rhs.id
-    );
-    this.ratingChanges.sort((lhs: RatingChangeDTO, rhs: RatingChangeDTO) => {
-      if (lhs.contestId === rhs.contestId) {
-        return 0;
-      } else if (lhs.contestId < rhs.contestId) {
-        return -1;
-      } else {
-        return 1;
-      }
-    });
+    this.submissions.sort((lhs, rhs) => lhs.id - rhs.id);
+    this.ratingChanges.sort((lhs, rhs) => lhs.contestId - rhs.contestId);
+
+    this.handles.push(...member.handles);
+    this.handles.sort((lhs, rhs) => rhs.rating - lhs.rating);
   }
 
   remove(handle: string) {
