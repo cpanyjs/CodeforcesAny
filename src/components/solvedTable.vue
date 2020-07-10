@@ -1,6 +1,7 @@
 <template>
   <b-table
     :data="source"
+    :columns="source.length === 0 ? columns : undefined"
     :paginated="true"
     :per-page="10"
     :current-page.sync="currentPage"
@@ -60,7 +61,22 @@ export default {
     source: Array
   },
   data: () => ({
-    currentPage: 1
+    currentPage: 1,
+    columns: [
+      {
+        field: 'creationTimeSeconds',
+        label: '时间',
+        width: 150
+      },
+      {
+        label: '题目'
+      },
+      {
+        field: 'problem.rating',
+        label: '难度',
+        width: 80
+      }
+    ]
   }),
   filters: {
     parseTime(val) {
