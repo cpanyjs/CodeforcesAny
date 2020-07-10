@@ -38,7 +38,13 @@
           }}</a
         >
       </b-table-column>
-      <b-table-column field="problem.rating" label="难度" numeric sortable>
+      <b-table-column
+        field="problem.rating"
+        label="难度"
+        width="80"
+        numeric
+        sortable
+      >
         <span>{{ props.row.problem.rating }}</span>
       </b-table-column>
     </template>
