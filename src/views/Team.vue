@@ -81,7 +81,7 @@
     <component
       :is="tableComponent"
       :source="tableSource | transform"
-      :showAction="showActionBar && mode === 'Handle'"
+      :showAction="showActionBar && current === null && mode === 'Handle'"
       :showID="showID"
     ></component>
 
