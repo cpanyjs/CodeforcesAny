@@ -51,7 +51,8 @@ export default {
         });
         this.$buefy.toast.open({
           message: `${this.name}的账号 ${this.handle} 添加成功`,
-          type: 'is-success'
+          type: 'is-success',
+          duration: 3000
         });
         this.$parent.close();
       } catch (err) {

@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { UserDTO, HandleDTO } from '../codeforces/type';
 import { addHandle, clearDB, removeHandle } from '../codeforces/store';
 import { Member } from '@/codeforces/member';
 
@@ -9,18 +8,23 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    handles: [] as HandleDTO[],
+    handles: [] as Member[],
     members: [] as Member[]
+  },
+  getters: {
+    allNameHandle(state) {
+      return state.handles.map(value => [value.name, value.handle]);
+    }
   },
   mutations: {
     initStore(
       state,
-      { handles, members }: { handles: HandleDTO[]; members: Member[] }
+      { handles, members }: { handles: Member[]; members: Member[] }
     ) {
       state.handles.push(...handles);
       state.members.push(...members);
     },
-    pushHandle(state, user: UserDTO) {
+    pushHandle(state, user: Member) {
       state.handles.push(user);
     },
     removeHandle(state, { handle }: { handle: string }) {

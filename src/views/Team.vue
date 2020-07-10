@@ -213,8 +213,10 @@ export default {
     onToggleAction() {
       this.showActionBar ^= 1;
     },
-    onRefresh() {
-      console.log('Refresh');
+    async onRefresh() {
+      const data = this.$store.getters.allNameHandle;
+      await this.$store.dispatch('clearAll');
+      this.multiAddHandles(data);
     },
     onClear() {
       this.$buefy.dialog.confirm({

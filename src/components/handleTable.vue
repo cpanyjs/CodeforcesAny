@@ -57,12 +57,21 @@
         </span>
       </b-table-column>
       <b-table-column label="操作" :visible="showAction" centered>
-        <b-button
-          size="is-small"
-          icon-left="delete"
-          type="is-danger"
-          @click="removeHandle(props.row)"
-        ></b-button>
+        <div>
+          <b-button
+            size="is-small"
+            icon-left="delete"
+            type="is-danger"
+            style="margin-right: 0.5rem"
+            @click="removeHandle(props.row)"
+          ></b-button>
+          <b-button
+            size="is-small"
+            icon-left="refresh"
+            type="is-info"
+            @click="refreshHandle(props.row)"
+          ></b-button>
+        </div>
       </b-table-column>
     </template>
 
@@ -124,7 +133,17 @@ export default {
       await this.$store.dispatch('removeHandle', { name, handle });
       this.$buefy.toast.open({
         message: `${name}的账号 ${handle} 已被删除`,
-        type: 'is-info'
+        type: 'is-info',
+        duration: 3000
+      });
+    },
+    async refreshHandle({ name, handle }) {
+      await this.$store.dispatch('removeHandle', { name, handle });
+      await this.$store.dispatch('addHandle', { name, handle });
+      this.$buefy.toast.open({
+        message: `${name}的账号 ${handle} 成功刷新`,
+        type: 'is-info',
+        duration: 3000
       });
     }
   }
