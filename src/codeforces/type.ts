@@ -13,6 +13,14 @@ export type UserDTO = HandleDTO & {
   ratingChanges: RatingChangeDTO[];
 };
 
+export interface HandleRating {
+  handle: string;
+  rating: number;
+  rank: string;
+  maxRating: number;
+  maxRank: string;
+}
+
 export enum Verdict {
   OK = 'OK',
   FAILED = 'FAILED',
@@ -51,6 +59,7 @@ export interface SubmissionDTO {
     tags: string[];
   };
   author: {
+    members: string[];
     participantType: ParticipantType;
   };
   programmingLanguage: string;

@@ -49,6 +49,10 @@ export default {
           name: this.name,
           handle: this.handle
         });
+        this.$buefy.toast.open({
+          message: `${this.name}的账号 ${this.handle} 添加成功`,
+          type: 'is-success'
+        });
         this.$parent.close();
       } catch (err) {
         this.name = '';

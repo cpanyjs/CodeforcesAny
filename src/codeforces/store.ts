@@ -51,3 +51,18 @@ export async function addHandle(
   memberStore.set(name, member);
   return [user, member];
 }
+
+export async function removeHandle(name: string, handle: string) {
+  const member = memberStore.get(name);
+  if (member === undefined) {
+    return undefined;
+  }
+  await handleStore.removeItem(handle);
+  member.remove(handle);
+  if (member.handles.length === 0) {
+    memberStore.delete(name);
+    return [undefined, undefined];
+  } else {
+    return [undefined, member];
+  }
+}

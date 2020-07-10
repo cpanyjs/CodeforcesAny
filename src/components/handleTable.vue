@@ -61,6 +61,7 @@
           size="is-small"
           icon-left="delete"
           type="is-danger"
+          @click="removeHandle(props.row)"
         ></b-button>
       </b-table-column>
     </template>
@@ -117,7 +118,16 @@ export default {
         numeric: true
       }
     ]
-  })
+  }),
+  methods: {
+    async removeHandle({ name, handle }) {
+      await this.$store.dispatch('removeHandle', { name, handle });
+      this.$buefy.toast.open({
+        message: `${name}的账号 ${handle} 已被删除`,
+        type: 'is-info'
+      });
+    }
+  }
 };
 </script>
 
