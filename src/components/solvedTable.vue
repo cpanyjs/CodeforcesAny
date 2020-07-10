@@ -48,6 +48,14 @@
       >
         <span>{{ props.row.problem.rating }}</span>
       </b-table-column>
+      <b-table-column field="problem.tags" label="标签" width="400">
+        <b-tag
+          v-for="tag in props.row.problem.tags"
+          :key="tag"
+          style="margin-right: 0.1rem"
+          >{{ tag }}</b-tag
+        >
+      </b-table-column>
     </template>
   </b-table>
 </template>
@@ -75,6 +83,11 @@ export default {
         field: 'problem.rating',
         label: '难度',
         width: 80
+      },
+      {
+        field: 'problem.tags',
+        label: '标签',
+        width: 400
       }
     ]
   }),
@@ -85,5 +98,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
