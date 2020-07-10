@@ -1,14 +1,31 @@
 <template>
-  <div class="box" v-if="profile">
-    <h2 class="is-size-3 has-text-weight-bold">
-      <span>{{ name }}</span>
-      <CodeforcesHandle
-        :handle="profile.handle"
-        :rating="profile.rating"
-      ></CodeforcesHandle>
+  <div class="card" v-if="profile">
+    <h2 class="card-header">
+      <div class="card-header-title is-size-3">
+        <span class="is-inline-block" style="margin-right: 0.5rem">{{
+          name
+        }}</span>
+        <CodeforcesHandle
+          :handle="profile.handle"
+          :rating="profile.rating"
+        ></CodeforcesHandle>
+      </div>
     </h2>
-    <div style="width: 50%; height: 50%;">
-      <svg ref="verdict"></svg>
+    <div class="card-content">
+      <div class="columns">
+        <div class="column is-half">
+          <h3 class="is-size-4 has-text-weight-bold">正确率</h3>
+          <div style="padding-right: 1rem">
+            <svg ref="verdict" />
+          </div>
+        </div>
+        <div class="column is-half">
+          <h3 class="is-size-4 has-text-weight-bold">1A 率</h3>
+          <div style="padding-right: 1rem">
+            <svg ref="1a" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +55,21 @@ export default {
 
     this.$nextTick(() => {
       new Pie(this.$refs.verdict, this.profile.analyzeVerdict(), {
+        innerRadius: 0.5,
+        legendPosition: positionType.upRight,
+        dataColors: [
+          '#0a0',
+          'red',
+          '#9179c0',
+          '#28a3dd',
+          '#f3db52',
+          '#ed84b5',
+          '#8e6d5a',
+          '#f19839',
+          '#949494'
+        ]
+      });
+      new Pie(this.$refs['1a'], this.profile.analyze1A(), {
         innerRadius: 0.5,
         legendPosition: positionType.upRight,
         dataColors: [

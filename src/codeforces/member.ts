@@ -5,6 +5,7 @@ import {
   HandleRating,
   Verdict
 } from './type';
+import { getProblemID } from './utils';
 
 export class Member {
   name: string;
@@ -26,7 +27,9 @@ export class Member {
     this.rating = data.rating;
     this.maxRank = data.maxRank;
     this.maxRating = data.maxRating;
-    this.submissions = [...data.submissions];
+    this.submissions = [...data.submissions].sort(
+      (lhs: SubmissionDTO, rhs: SubmissionDTO) => lhs.id - rhs.id
+    );
     this.ratingChanges = [...data.ratingChanges];
     this.handles = [
       {
@@ -59,15 +62,9 @@ export class Member {
     });
     this.submissions.push(...member.submissions);
     this.ratingChanges.push(...member.ratingChanges);
-    this.submissions.sort((lhs: SubmissionDTO, rhs: SubmissionDTO) => {
-      if (lhs.id === rhs.id) {
-        return 0;
-      } else if (lhs.id < rhs.id) {
-        return -1;
-      } else {
-        return 1;
-      }
-    });
+    this.submissions.sort(
+      (lhs: SubmissionDTO, rhs: SubmissionDTO) => lhs.id - rhs.id
+    );
     this.ratingChanges.sort((lhs: RatingChangeDTO, rhs: RatingChangeDTO) => {
       if (lhs.contestId === rhs.contestId) {
         return 0;
@@ -111,6 +108,59 @@ export class Member {
     result.push(['RE', map.get(Verdict.RUNTIME_ERROR) || 0]);
     result.push(['ILE', map.get(Verdict.IDLENESS_LIMIT_EXCEEDED) || 0]);
     result.push(['CE', map.get(Verdict.COMPILATION_ERROR) || 0]);
+    return result;
+  }
+
+  analyze1A() {
+    const map = new Map<string, Array<Verdict>>();
+    for (const sub of this.submissions) {
+      const verdict = sub.verdict;
+      const pid = getProblemID(sub);
+      if (!map.has(pid)) {
+        map.set(pid, []);
+      }
+      const vList = map.get(pid) as Array<Verdict>;
+      if (vList.length === 0 || vList[vList.length - 1] !== Verdict.OK) {
+        vList.push(verdict);
+      }
+    }
+    const result: Array<[string, number]> = [
+      ['1A', 0],
+      ['+1', 0],
+      ['+2', 0],
+      ['+3', 0],
+      ['+4', 0],
+      ['+5', 0],
+      ['+5 以上', 0]
+    ];
+    for (const [, value] of map) {
+      if (value[value.length - 1] !== Verdict.OK) {
+        continue;
+      }
+      switch (value.length) {
+        case 1:
+          result[0][1]++;
+          break;
+        case 2:
+          result[1][1]++;
+          break;
+        case 3:
+          result[2][1]++;
+          break;
+        case 4:
+          result[3][1]++;
+          break;
+        case 5:
+          result[4][1]++;
+          break;
+        case 6:
+          result[5][1]++;
+          break;
+        default:
+          result[6][1]++;
+          break;
+      }
+    }
     return result;
   }
 }
