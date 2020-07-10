@@ -6,7 +6,7 @@
     target="_blank"
     rel="noopener noreferrer"
   >
-    {{ handle }}
+    <span>{{ handle }}</span>
   </a>
 </template>
 

@@ -17,22 +17,26 @@
           Codeforces 账号：
           <span v-for="handle in profile.handles" :key="handle.handle">
             <CodeforcesHandle
+              style="margin-right: 0.5rem"
               :handle="handle.handle"
               :rating="handle.rating"
             ></CodeforcesHandle>
           </span>
-          。
         </div>
       </div>
       <div class="columns">
         <div class="column is-half">
-          <h3 class="is-size-4 has-text-weight-bold">正确率</h3>
+          <h3 class="is-size-4 has-text-weight-bold has-text-centered">
+            正确率
+          </h3>
           <div style="padding-right: 1rem">
             <svg ref="verdict" />
           </div>
         </div>
         <div class="column is-half">
-          <h3 class="is-size-4 has-text-weight-bold">1A 率</h3>
+          <h3 class="is-size-4 has-text-weight-bold has-text-centered">
+            1A 率
+          </h3>
           <div style="padding-right: 1rem">
             <svg ref="1a" />
           </div>
