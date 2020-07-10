@@ -42,15 +42,28 @@
           </div>
         </div>
       </div>
+      <div class="columns">
+        <div class="column">
+          <h3 class="is-size-4 has-text-weight-bold has-text-centered">
+            近期通过的题目
+          </h3>
+          <SolvedTable :source="submissions"></SolvedTable>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { Pie, positionType } from '../plugins/chart';
+import { filterAC } from '../codeforces/utils';
+import SolvedTable from '../components/solvedTable';
 
 export default {
   name: 'Profile',
+  components: {
+    SolvedTable
+  },
   props: {
     name: String,
     handle: String
@@ -58,6 +71,15 @@ export default {
   data: () => ({
     profile: null
   }),
+  computed: {
+    submissions() {
+      if (this.profile) {
+        return filterAC(this.profile.submissions).reverse();
+      } else {
+        return [];
+      }
+    }
+  },
   mounted() {
     if (this.name) {
       this.profile = this.$store.getters.member(this.name);
@@ -68,7 +90,7 @@ export default {
     if (!this.profile) {
       this.$router.replace({ name: 'Home' });
     }
-    console.log(this.profile);
+
     this.$nextTick(() => {
       new Pie(this.$refs.verdict, this.profile.analyzeVerdict(), {
         innerRadius: 0.5,

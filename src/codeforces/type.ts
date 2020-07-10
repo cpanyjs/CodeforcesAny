@@ -52,10 +52,12 @@ export enum ParticipantType {
 export interface SubmissionDTO {
   id: number;
   contestId: number;
+  creationTimeSeconds: number;
   problem: {
     contestId: number;
     index: string;
     name: string;
+    rating: number;
     tags: string[];
   };
   author: {

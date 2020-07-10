@@ -12,6 +12,7 @@
     "buefy": "^0.8.20",
     "chart.xkcd": "^1.1.13",
     "core-js": "^3.6.5",
+    "dayjs": "^1.8.29",
     "localforage": "^1.7.4",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.1",
