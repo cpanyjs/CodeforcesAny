@@ -1,4 +1,10 @@
-import { SubmissionDTO, UserDTO, RatingChangeDTO, HandleRating } from './type';
+import {
+  SubmissionDTO,
+  UserDTO,
+  RatingChangeDTO,
+  HandleRating,
+  Verdict
+} from './type';
 
 export class Member {
   name: string;
@@ -84,5 +90,27 @@ export class Member {
     this.ratingChanges = this.ratingChanges.filter(
       value => value.handle !== handle
     );
+  }
+
+  analyzeVerdict() {
+    const map = new Map<Verdict, number>();
+    for (const sub of this.submissions) {
+      const verdict = sub.verdict;
+      if (map.has(verdict)) {
+        const val = map.get(verdict) as number;
+        map.set(verdict, val + 1);
+      } else {
+        map.set(verdict, 1);
+      }
+    }
+    const result: Array<[string, number]> = [];
+    result.push(['OK', map.get(Verdict.OK) || 0]);
+    result.push(['WA', map.get(Verdict.WRONG_ANSWER) || 0]);
+    result.push(['TLE', map.get(Verdict.TIME_LIMIT_EXCEEDED) || 0]);
+    result.push(['MLE', map.get(Verdict.MEMORY_LIMIT_EXCEEDED) || 0]);
+    result.push(['RE', map.get(Verdict.RUNTIME_ERROR) || 0]);
+    result.push(['ILE', map.get(Verdict.IDLENESS_LIMIT_EXCEEDED) || 0]);
+    result.push(['CE', map.get(Verdict.COMPILATION_ERROR) || 0]);
+    return result;
   }
 }

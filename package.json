@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "buefy": "^0.8.20",
+    "chart.xkcd": "^1.1.13",
     "core-js": "^3.6.5",
     "localforage": "^1.7.4",
     "node-sass": "^4.14.1",
