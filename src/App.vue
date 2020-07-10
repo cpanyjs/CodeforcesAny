@@ -25,10 +25,6 @@ export default {
 $primary: $turquoise;
 $primary-invert: findColorInvert($primary);
 
-$link: $primary;
-$link-invert: $primary-invert;
-$link-focus-border: $primary;
-
 $navbar-padding-vertical: 0.5rem;
 
 $section-padding: 2rem 2rem;

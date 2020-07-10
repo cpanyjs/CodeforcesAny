@@ -6,8 +6,11 @@ import store from './store';
 import './plugins/buefy';
 import { loadDB } from './codeforces/store';
 import { rankColor } from './utils';
+import CodeforcesHandle from './components/CodeforcesHandle.vue';
 
 Vue.config.productionTip = false;
+
+Vue.component('CodeforcesHandle', CodeforcesHandle);
 
 Vue.filter(rankColor[0], rankColor[1]);
 

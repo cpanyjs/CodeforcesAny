@@ -14,6 +14,9 @@ export default new Vuex.Store({
   getters: {
     allNameHandle(state) {
       return state.handles.map(value => [value.name, value.handle]);
+    },
+    member(state) {
+      return (name: string) => state.members.find(value => value.name === name);
     }
   },
   mutations: {

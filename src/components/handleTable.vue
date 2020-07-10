@@ -12,18 +12,15 @@
         </span>
       </b-table-column>
       <b-table-column label="Handle">
-        <a
-          :href="'http://codeforces.com/profile/' + props.row.handle"
-          :style="props.row.rating | rankColor"
-          class="has-text-weight-bold"
-        >
-          {{ props.row.handle }}
-        </a>
+        <CodeforcesHandle
+          :handle="props.row.handle"
+          :rating="props.row.rating"
+        ></CodeforcesHandle>
       </b-table-column>
       <b-table-column label="姓名">
-        <span>
+        <router-link :to="{ name: 'Profile', query: { name: props.row.name } }">
           {{ props.row.name }}
-        </span>
+        </router-link>
       </b-table-column>
       <b-table-column field="rating" label="Rating" numeric sortable>
         <span
