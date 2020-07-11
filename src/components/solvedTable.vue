@@ -93,7 +93,7 @@ export default {
   }),
   filters: {
     parseTime(val) {
-      return dayjs(val * 1000).format('YYYY-MM-DD hh:mm');
+      return dayjs(val * 1000).format('YYYY-MM-DD HH:mm');
     }
   }
 };
