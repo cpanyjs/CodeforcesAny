@@ -3,9 +3,13 @@ import {
   UserDTO,
   RatingChangeDTO,
   HandleRating,
-  Verdict
+  Verdict,
+  ParticipantType,
+  ParticipateContest,
+  ContestDTO
 } from './type';
 import { getProblemID } from './utils';
+import { getContestById } from './store';
 
 export class Member {
   name: string;
@@ -74,6 +78,37 @@ export class Member {
     this.ratingChanges = this.ratingChanges.filter(
       value => value.handle !== handle
     );
+  }
+
+  contests() {
+    const result: ParticipateContest[] = this.ratingChanges.map(
+      ({ contestId, contestName, newRating, oldRating }) => ({
+        contestId,
+        contestName,
+        type: ParticipantType.CONTESTANT,
+        startTimeSeconds: (getContestById(contestId) as ContestDTO)
+          .startTimeSeconds,
+        ratingChange: newRating - oldRating
+      })
+    );
+    const set = new Set<number>(
+      this.ratingChanges.map(({ contestId }) => contestId)
+    );
+    for (const sub of this.submissions) {
+      if (sub.author.participantType === ParticipantType.VIRTUAL) {
+        const contest = getContestById(sub.contestId);
+        if (!set.has(sub.contestId) && contest) {
+          set.add(sub.contestId);
+          result.push({
+            contestId: sub.contestId,
+            contestName: contest.name,
+            type: ParticipantType.VIRTUAL,
+            startTimeSeconds: sub.creationTimeSeconds - sub.relativeTimeSeconds
+          });
+        }
+      }
+    }
+    return result;
   }
 
   analyzeVerdict() {

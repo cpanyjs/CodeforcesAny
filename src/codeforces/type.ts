@@ -53,6 +53,7 @@ export interface SubmissionDTO {
   id: number;
   contestId: number;
   creationTimeSeconds: number;
+  relativeTimeSeconds: number;
   problem: {
     contestId: number;
     index: string;
@@ -82,4 +83,13 @@ export interface ContestDTO {
   name: string;
   type: string; // enum: CF, IOI, ICPC
   phase: string; // enum: BEFORE, CODING, PENDING_SYSTEM_TEST, SYSTEM_TEST, FINISHED
+  startTimeSeconds: number;
+}
+
+export interface ParticipateContest {
+  contestId: number;
+  contestName: string;
+  type: ParticipantType;
+  startTimeSeconds: number;
+  ratingChange?: number;
 }

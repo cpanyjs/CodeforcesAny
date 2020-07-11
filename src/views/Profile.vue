@@ -50,6 +50,14 @@
           <SolvedTable :source="submissions"></SolvedTable>
         </div>
       </div>
+      <div class="columns">
+        <div class="column">
+          <h3 class="is-size-4 has-text-weight-bold has-text-centered">
+            近期参加的比赛
+          </h3>
+          <ContestTable :source="contests"></ContestTable>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -58,11 +66,13 @@
 import { Pie, positionType } from '../plugins/chart';
 import { filterAC } from '../codeforces/utils';
 import SolvedTable from '../components/solvedTable';
+import ContestTable from '../components/contestTable';
 
 export default {
   name: 'Profile',
   components: {
-    SolvedTable
+    SolvedTable,
+    ContestTable
   },
   props: {
     name: String,
@@ -78,6 +88,9 @@ export default {
       } else {
         return [];
       }
+    },
+    contests() {
+      return this.profile.contests();
     }
   },
   mounted() {

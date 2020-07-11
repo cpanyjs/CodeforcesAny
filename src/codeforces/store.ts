@@ -1,7 +1,7 @@
 import localforage from 'localforage';
 
-import { getUser } from './api';
-import { UserDTO } from './type';
+import { getUser, getContestList } from './api';
+import { UserDTO, ContestDTO } from './type';
 import { Member } from './member';
 
 const handleStore = localforage.createInstance({
@@ -9,6 +9,8 @@ const handleStore = localforage.createInstance({
 });
 
 const memberStore = new Map<string, Member>();
+
+const contestStore = new Map<number, ContestDTO>();
 
 export async function loadDB() {
   const handles: UserDTO[] = [];
@@ -26,6 +28,9 @@ export async function loadDB() {
   memberStore.forEach((value: Member) => {
     members.push(value);
   });
+  for (const contest of await getContestList()) {
+    contestStore.set(contest.id, contest);
+  }
   return [handles, members];
 }
 
@@ -65,4 +70,8 @@ export async function removeHandle(name: string, handle: string) {
   } else {
     return [undefined, member];
   }
+}
+
+export function getContestById(id: number) {
+  return contestStore.get(id);
 }

@@ -70,3 +70,10 @@ export async function getContestList(): Promise<ContestDTO[]> {
   } = await api.get('contest.list');
   return result as ContestDTO[];
 }
+
+export async function getGymContestList(): Promise<ContestDTO[]> {
+  const {
+    data: { result }
+  } = await api.get('contest.list?gym=true');
+  return result as ContestDTO[];
+}
