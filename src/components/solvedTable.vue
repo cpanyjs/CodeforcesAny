@@ -57,6 +57,17 @@
         >
       </b-table-column>
     </template>
+
+    <template slot="empty">
+      <section class="section">
+        <div class="content has-text-grey has-text-centered">
+          <p>
+            <b-icon icon="emoticon-sad" size="is-large"></b-icon>
+          </p>
+          <p>快去写题！</p>
+        </div>
+      </section>
+    </template>
   </b-table>
 </template>
 
