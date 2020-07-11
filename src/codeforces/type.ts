@@ -92,4 +92,6 @@ export interface ParticipateContest {
   type: ParticipantType;
   startTimeSeconds: number;
   ratingChange?: number;
+  newRating?: number;
+  rank?: number;
 }

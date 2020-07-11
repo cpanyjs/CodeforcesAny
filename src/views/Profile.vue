@@ -42,20 +42,22 @@
           </div>
         </div>
       </div>
-      <div class="columns">
-        <div class="column">
-          <h3 class="is-size-4 has-text-weight-bold has-text-centered">
-            近期通过的题目
-          </h3>
-          <SolvedTable :source="submissions"></SolvedTable>
-        </div>
-      </div>
+
       <div class="columns">
         <div class="column">
           <h3 class="is-size-4 has-text-weight-bold has-text-centered">
             近期参加的比赛
           </h3>
           <ContestTable :source="contests"></ContestTable>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <h3 class="is-size-4 has-text-weight-bold has-text-centered">
+            近期通过的题目
+          </h3>
+          <SolvedTable :source="submissions"></SolvedTable>
         </div>
       </div>
     </div>

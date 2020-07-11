@@ -82,13 +82,15 @@ export class Member {
 
   contests() {
     const result: ParticipateContest[] = this.ratingChanges.map(
-      ({ contestId, contestName, newRating, oldRating }) => ({
+      ({ contestId, contestName, newRating, oldRating, rank }) => ({
         contestId,
         contestName,
         type: ParticipantType.CONTESTANT,
         startTimeSeconds: (getContestById(contestId) as ContestDTO)
           .startTimeSeconds,
-        ratingChange: newRating - oldRating
+        ratingChange: newRating - oldRating,
+        newRating,
+        rank
       })
     );
     const set = new Set<number>(

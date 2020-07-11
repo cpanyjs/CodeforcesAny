@@ -30,9 +30,20 @@
           >{{ props.row.contestName }}</a
         >
       </b-table-column>
-      <b-table-column field="type" label="类型" width="100" sortable>{{
-        props.row.type | parseType
-      }}</b-table-column>
+      <b-table-column field="rank" label="排名" width="100" numeric>
+        <span>{{ props.row.rank }}</span>
+      </b-table-column>
+      <!-- <b-table-column field="ratingChange" label="积分变化" width="100" numeric>
+        <b-tooltip type="is-light" :label="'Rating: ' + props.row.newRating">
+          <span
+            class="has-text-weight-bold"
+            :style="{ color: props.row.ratingChange > 0 ? '#008000' : '#808080' }"
+          >{{ props.row.ratingChange > 0 ? '+' : '' }}{{ props.row.ratingChange }}</span>
+        </b-tooltip>
+      </b-table-column> -->
+      <b-table-column field="type" label="类型" width="100" sortable>
+        {{ props.row.type | parseType }}
+      </b-table-column>
     </template>
   </b-table>
 </template>
@@ -51,10 +62,16 @@ export default {
       {
         field: 'creationTimeSeconds',
         label: '时间',
+        sortable: true,
         width: 150
       },
       {
         label: '比赛'
+      },
+      {
+        field: 'rank',
+        label: '排名',
+        numeric: true
       },
       {
         field: 'type',
