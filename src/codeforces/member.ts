@@ -161,28 +161,10 @@ export class Member {
       if (value[value.length - 1] !== Verdict.OK) {
         continue;
       }
-      switch (value.length) {
-        case 1:
-          result[0][1]++;
-          break;
-        case 2:
-          result[1][1]++;
-          break;
-        case 3:
-          result[2][1]++;
-          break;
-        case 4:
-          result[3][1]++;
-          break;
-        case 5:
-          result[4][1]++;
-          break;
-        case 6:
-          result[5][1]++;
-          break;
-        default:
-          result[6][1]++;
-          break;
+      if (value.length <= 6) {
+        result[value.length - 1][1]++;
+      } else {
+        result[6][1]++;
       }
     }
     return result;
