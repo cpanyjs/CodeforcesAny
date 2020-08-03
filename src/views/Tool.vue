@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <b-button tag="router-link" :to="{ name: 'Rank' }">Rank 统计工具</b-button>
   </div>
 </template>

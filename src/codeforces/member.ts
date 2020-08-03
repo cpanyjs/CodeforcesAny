@@ -97,14 +97,17 @@ export class Member {
       this.ratingChanges.map(({ contestId }) => contestId)
     );
     for (const sub of this.submissions) {
-      if (sub.author.participantType === ParticipantType.VIRTUAL) {
+      if (
+        sub.author.participantType === ParticipantType.VIRTUAL ||
+        sub.author.participantType === ParticipantType.OUT_OF_COMPETITION
+      ) {
         const contest = getContestById(sub.contestId);
         if (!set.has(sub.contestId) && contest) {
           set.add(sub.contestId);
           result.push({
             contestId: sub.contestId,
             contestName: contest.name,
-            type: ParticipantType.VIRTUAL,
+            type: sub.author.participantType,
             startTimeSeconds: sub.creationTimeSeconds - sub.relativeTimeSeconds
           });
         }

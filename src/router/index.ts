@@ -42,6 +42,11 @@ const routes: Array<RouteConfig> = [
     path: '/tool',
     name: 'Tool',
     component: () => import('../views/Tool.vue')
+  },
+  {
+    path: '/tool/rank',
+    name: 'Rank',
+    component: () => import('../components/Board.vue')
   }
 ];
 

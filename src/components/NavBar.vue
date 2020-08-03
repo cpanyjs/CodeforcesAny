@@ -9,6 +9,9 @@
       <b-navbar-item tag="router-link" :to="{ name: 'Team' }"
         >成员</b-navbar-item
       >
+      <b-navbar-item tag="router-link" :to="{ name: 'Tool' }"
+        >工具</b-navbar-item
+      >
     </template>
 
     <template slot="end">

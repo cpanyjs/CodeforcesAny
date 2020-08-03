@@ -100,6 +100,8 @@ export default {
         return '正式参赛';
       } else if (val === 'VIRTUAL') {
         return '虚拟参赛';
+      } else if (val === 'OUT_OF_COMPETITION') {
+        return '打星参赛';
       } else {
         return '其他';
       }
