@@ -113,7 +113,9 @@ export class Member {
         }
       }
     }
-    return result;
+    return result.sort(
+      (lhs, rhs) => lhs.startTimeSeconds - rhs.startTimeSeconds
+    );
   }
 
   analyzeVerdict() {

@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import HandleTable from '../components/handleTable';
+import HandleTable from '../components/tables/handleTable';
 import AddHandleForm from '../components/addHandle';
 import { sleep } from '../utils';
 import { filterAC, filterContest } from '../codeforces/utils';

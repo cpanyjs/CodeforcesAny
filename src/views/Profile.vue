@@ -48,7 +48,7 @@
           <h3 class="is-size-4 has-text-weight-bold has-text-centered">
             近期参加的比赛
           </h3>
-          <ContestTable :source="contests"></ContestTable>
+          <ContestTable :source="contests | mapId"></ContestTable>
         </div>
       </div>
 
@@ -57,7 +57,7 @@
           <h3 class="is-size-4 has-text-weight-bold has-text-centered">
             近期通过的题目
           </h3>
-          <SolvedTable :source="submissions"></SolvedTable>
+          <SolvedTable :source="submissions | mapId"></SolvedTable>
         </div>
       </div>
     </div>
@@ -67,8 +67,8 @@
 <script>
 import { Pie, positionType } from '../plugins/chart';
 import { filterAC } from '../codeforces/utils';
-import SolvedTable from '../components/solvedTable';
-import ContestTable from '../components/contestTable';
+import SolvedTable from '../components/tables/solvedTable';
+import ContestTable from '../components/tables/contestTable';
 
 export default {
   name: 'Profile',
@@ -86,13 +86,22 @@ export default {
   computed: {
     submissions() {
       if (this.profile) {
-        return filterAC(this.profile.submissions).reverse();
+        return filterAC(this.profile.submissions);
       } else {
         return [];
       }
     },
     contests() {
-      return this.profile.contests();
+      if (this.profile) {
+        return this.profile.contests();
+      } else {
+        return [];
+      }
+    }
+  },
+  filters: {
+    mapId(arr) {
+      return arr.map((val, id) => ({ ...val, id: id + 1 }));
     }
   },
   mounted() {
