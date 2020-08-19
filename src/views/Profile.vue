@@ -66,7 +66,6 @@
 
 <script>
 import { Pie, positionType } from '../plugins/chart';
-import { filterAC } from '../codeforces/utils';
 import SolvedTable from '../components/tables/solvedTable';
 import ContestTable from '../components/tables/contestTable';
 
@@ -86,7 +85,7 @@ export default {
   computed: {
     submissions() {
       if (this.profile) {
-        return filterAC(this.profile.submissions);
+        return this.profile.acProblems();
       } else {
         return [];
       }

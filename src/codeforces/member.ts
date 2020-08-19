@@ -25,6 +25,7 @@ export class Member {
 
   cache: {
     contests?: ParticipateContest[];
+    acProblems?: SubmissionDTO[];
     verdict?: Array<[string, number]>;
     oneA?: Array<[string, number]>;
   } = {};
@@ -132,6 +133,26 @@ export class Member {
     return (this.cache.contests = result.sort(
       (lhs, rhs) => lhs.startTimeSeconds - rhs.startTimeSeconds
     ));
+  }
+
+  acProblems() {
+    if ('acProblems' in this.cache) {
+      return this.cache.acProblems;
+    }
+
+    const pid = new Set<string>();
+    const result: SubmissionDTO[] = [];
+    this.submissions
+      .filter(sub => sub.verdict === Verdict.OK)
+      .forEach(sub => {
+        const id = getProblemID(sub);
+        if (!pid.has(id)) {
+          pid.add(id);
+          result.push(sub);
+        }
+      });
+
+    return (this.cache.acProblems = result);
   }
 
   analyzeVerdict() {

@@ -261,8 +261,14 @@ export default {
           handle: user.handle,
           rating: user.rating,
           maxRating: user.maxRating,
-          acNum: filterAC(user.submissions).length,
-          contestNum: filterContest(user.ratingChanges).length
+          acNum:
+            typeof user.acProblems === 'function'
+              ? user.acProblems().length
+              : filterAC(user.submissions).length,
+          contestNum:
+            typeof user.contests === 'function'
+              ? user.contests().length
+              : filterContest(user.ratingChanges).length
         };
       });
     }
