@@ -8,7 +8,7 @@ import { loadDB } from './codeforces/store';
 import { rankColor, parseTime } from './filters';
 import CodeforcesHandle from './components/CodeforcesHandle.vue';
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = process.env.NODE_ENV === 'production';
 
 Vue.component('CodeforcesHandle', CodeforcesHandle);
 
