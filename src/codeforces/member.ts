@@ -23,6 +23,12 @@ export class Member {
   submissions: SubmissionDTO[];
   ratingChanges: RatingChangeDTO[];
 
+  cache: {
+    contests?: ParticipateContest[];
+    verdict?: Array<[string, number]>;
+    oneA?: Array<[string, number]>;
+  } = {};
+
   constructor(data: UserDTO) {
     this.name = data.name;
     this.handle = data.handle;
@@ -48,6 +54,9 @@ export class Member {
 
   merge(member: Member) {
     if (this.name !== member.name) return false;
+
+    this.cache = {};
+
     if (member.rating > this.rating) {
       this.rating = member.rating;
       this.rank = member.rank;
@@ -68,6 +77,8 @@ export class Member {
   }
 
   remove(handle: string) {
+    this.cache = {};
+
     const id = this.handles.findIndex(val => val.handle === handle);
     if (id !== -1) {
       this.handles.splice(id, 1);
@@ -81,6 +92,10 @@ export class Member {
   }
 
   contests() {
+    if ('contests' in this.cache) {
+      return this.cache.contests;
+    }
+
     const result: ParticipateContest[] = this.ratingChanges.map(
       ({ contestId, contestName, newRating, oldRating, rank }) => ({
         contestId,
@@ -113,12 +128,17 @@ export class Member {
         }
       }
     }
-    return result.sort(
+
+    return (this.cache.contests = result.sort(
       (lhs, rhs) => lhs.startTimeSeconds - rhs.startTimeSeconds
-    );
+    ));
   }
 
   analyzeVerdict() {
+    if ('verdict' in this.cache) {
+      return this.cache.verdict;
+    }
+
     const map = new Map<Verdict, number>();
     for (const sub of this.submissions) {
       const verdict = sub.verdict;
@@ -137,10 +157,14 @@ export class Member {
     result.push(['RE', map.get(Verdict.RUNTIME_ERROR) || 0]);
     result.push(['ILE', map.get(Verdict.IDLENESS_LIMIT_EXCEEDED) || 0]);
     result.push(['CE', map.get(Verdict.COMPILATION_ERROR) || 0]);
-    return result;
+    return (this.cache.verdict = result);
   }
 
   analyze1A() {
+    if ('oneA' in this.cache) {
+      return this.cache.oneA;
+    }
+
     const map = new Map<string, Array<Verdict>>();
     for (const sub of this.submissions) {
       const verdict = sub.verdict;
@@ -172,6 +196,6 @@ export class Member {
         result[6][1]++;
       }
     }
-    return result;
+    return (this.cache.oneA = result);
   }
 }
