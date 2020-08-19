@@ -12,8 +12,8 @@ Vue.config.productionTip = false;
 
 Vue.component('CodeforcesHandle', CodeforcesHandle);
 
-Vue.filter(rankColor.name, rankColor);
-Vue.filter(parseTime.name, parseTime);
+Vue.filter('rankColor', rankColor);
+Vue.filter('parseTime', parseTime);
 
 new Vue({
   router,
