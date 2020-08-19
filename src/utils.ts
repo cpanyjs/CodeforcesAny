@@ -16,8 +16,3 @@ export function getColor(rating?: number) {
   if (rating < 2400) return '#FF8C00';
   return 'red';
 }
-
-export const rankColor: [string, Function] = [
-  'rankColor',
-  (rating?: number) => `color: ${getColor(rating)}`
-];

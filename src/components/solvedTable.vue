@@ -72,8 +72,6 @@
 </template>
 
 <script>
-import dayjs from 'dayjs';
-
 export default {
   name: 'SolvedTable',
   props: {
@@ -101,11 +99,6 @@ export default {
         width: 400
       }
     ]
-  }),
-  filters: {
-    parseTime(val) {
-      return dayjs(val * 1000).format('YYYY-MM-DD HH:mm');
-    }
-  }
+  })
 };
 </script>

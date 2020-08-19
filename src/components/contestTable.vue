@@ -60,8 +60,6 @@
 </template>
 
 <script>
-import dayjs from 'dayjs';
-
 export default {
   name: 'ContestTable',
   props: {
@@ -92,9 +90,6 @@ export default {
     ]
   }),
   filters: {
-    parseTime(val) {
-      return dayjs(val * 1000).format('YYYY-MM-DD HH:mm');
-    },
     parseType(val) {
       if (val === 'CONTESTANT') {
         return '正式参赛';

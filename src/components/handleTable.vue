@@ -6,7 +6,7 @@
     default-sort-direction="desc"
   >
     <template slot-scope="props">
-      <b-table-column label="ID" numeric :visible="showID">
+      <b-table-column label="序号" numeric :visible="showID">
         <span class="has-text-weight-bold">
           {{ props.index + 1 }}
         </span>
@@ -95,6 +95,11 @@ export default {
   },
   data: () => ({
     columns: [
+      {
+        field: 'id',
+        label: '序号',
+        numeric: true
+      },
       {
         field: 'handle',
         label: 'Handle'

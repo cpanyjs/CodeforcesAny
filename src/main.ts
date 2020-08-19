@@ -5,14 +5,15 @@ import store from './store';
 
 import './plugins/buefy';
 import { loadDB } from './codeforces/store';
-import { rankColor } from './utils';
+import { rankColor, parseTime } from './filters';
 import CodeforcesHandle from './components/CodeforcesHandle.vue';
 
 Vue.config.productionTip = false;
 
 Vue.component('CodeforcesHandle', CodeforcesHandle);
 
-Vue.filter(rankColor[0], rankColor[1]);
+Vue.filter(rankColor.name, rankColor);
+Vue.filter(parseTime.name, parseTime);
 
 new Vue({
   router,
