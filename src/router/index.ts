@@ -39,6 +39,21 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
+    path: '/contest',
+    name: 'Contest',
+    component: () => import('../views/Contest.vue'),
+    props: route => ({ contestId: Number(route.query.id) }),
+    beforeEnter(to, from, next) {
+      const hasId =
+        to.query.id !== null && to.query.id !== undefined && to.query.id !== '';
+      if (hasId) {
+        next();
+      } else {
+        next({ name: 'Home' });
+      }
+    }
+  },
+  {
     path: '/tool',
     name: 'Tool',
     component: () => import('../views/Tool.vue')

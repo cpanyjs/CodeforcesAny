@@ -12,6 +12,9 @@ const memberStore = new Map<string, Member>();
 
 const contestStore = new Map<number, ContestDTO>();
 
+const recentContestNum = 10;
+const recentContests: ContestDTO[] = [];
+
 export async function loadDB() {
   const handles: UserDTO[] = [];
   const members: Member[] = [];
@@ -29,6 +32,9 @@ export async function loadDB() {
     members.push(value);
   });
   for (const contest of await getContestList()) {
+    if (recentContests.length < recentContestNum) {
+      recentContests.push(contest);
+    }
     contestStore.set(contest.id, contest);
   }
   return [handles, members];
@@ -37,6 +43,10 @@ export async function loadDB() {
 export async function clearDB() {
   await handleStore.clear();
   memberStore.clear();
+}
+
+export function getRecentContests() {
+  return recentContests;
 }
 
 export async function addHandle(

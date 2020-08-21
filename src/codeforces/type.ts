@@ -84,6 +84,7 @@ export interface ContestDTO {
   type: string; // enum: CF, IOI, ICPC
   phase: string; // enum: BEFORE, CODING, PENDING_SYSTEM_TEST, SYSTEM_TEST, FINISHED
   startTimeSeconds: number;
+  durationSeconds: number;
 }
 
 export interface ParticipateContest {
