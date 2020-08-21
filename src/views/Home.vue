@@ -106,7 +106,7 @@ export default {
       return getContestState(time);
     },
     stateIcon(state) {
-      if (state === -1) {
+      if (state === 1) {
         return 'check';
       } else if (state === 0) {
         return 'bird';
@@ -115,7 +115,7 @@ export default {
       }
     },
     stateColor(state) {
-      if (state === -1) {
+      if (state === 1) {
         return 'is-success';
       } else if (state === 0) {
         return 'is-primary';

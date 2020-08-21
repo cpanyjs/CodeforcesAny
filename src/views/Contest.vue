@@ -7,7 +7,8 @@
         }}</span>
       </div>
     </h2>
-    <div class="card-content">
+    <div class="card-content content">
+      <p>举办时间：{{ contest.startTimeSeconds | parseTime }}。</p>
       <p>
         <a :href="`http://codeforces.com/contest/${contestId}`" target="_blank"
           >比赛主页</a
@@ -16,6 +17,14 @@
           :href="`http://codeforces.com/contest/${contestId}/standings`"
           target="_blank"
           >榜单</a
+        >
+        &nbsp;
+        <a
+          :href="
+            `http://codeforces.com/contest/${contestId}/standings/friends/true`
+          "
+          target="_blank"
+          >好友榜单</a
         >
       </p>
     </div>
