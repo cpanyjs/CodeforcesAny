@@ -1,6 +1,6 @@
 <template>
   <div v-if="show" class="has-text-centered">
-    <div>
+    <div :style="{ lineHeight: result.points > 0 ? '1.5' : '3' }">
       <span class="has-text-weight-bold" :style="{ color: fontColor }">{{
         (result.points > 0 ? '+' : '-') +
           (result.rejectedAttemptCount > 0 ? result.rejectedAttemptCount : '')
