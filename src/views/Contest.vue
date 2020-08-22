@@ -28,7 +28,11 @@
         >
       </p>
       <p v-if="problems">
-        <RankTable :problems="problems" :rows="rows"></RankTable>
+        <RankTable
+          :contest-id="contestId"
+          :problems="problems"
+          :rows="rows"
+        ></RankTable>
       </p>
     </div>
   </div>

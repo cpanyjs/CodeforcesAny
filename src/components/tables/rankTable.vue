@@ -6,6 +6,7 @@
         numeric
         centered
         width="24"
+        class="has-text-weight-bold"
         style="line-height: 3;"
       >
         {{ props.row.rank }}</b-table-column
@@ -16,18 +17,38 @@
           :rating="props.row.handle.rating"
         ></CodeforcesHandle
       ></b-table-column>
-      <b-table-column label="解决" centered style="line-height: 3;">{{
-        props.row.problemResults | solvedNum
-      }}</b-table-column>
-      <b-table-column label="罚时" centered style="line-height: 3;">{{
-        props.row.problemResults | penalty
-      }}</b-table-column>
+      <b-table-column
+        label="解决"
+        width="72"
+        class="has-text-weight-bold"
+        centered
+        style="line-height: 3;"
+        >{{ props.row.problemResults | solvedNum }}</b-table-column
+      >
+      <b-table-column
+        label="罚时"
+        width="100"
+        centered
+        style="line-height: 3;"
+        >{{ props.row.problemResults | penalty }}</b-table-column
+      >
       <b-table-column
         v-for="(problem, i) in problems"
         :key="problem.index"
         :label="problem.index"
+        width="72"
         centered
       >
+        <template v-slot:header="{ column }">
+          <a
+            :href="
+              `http://codeforces.com/contest/${contestId}/problem/${problem.index}`
+            "
+            target="_blank"
+            class="has-text-black"
+            >{{ column.label }}</a
+          >
+        </template>
         <ProblemResult :result="props.row.problemResults[i]"></ProblemResult>
       </b-table-column>
     </template>
@@ -55,6 +76,7 @@ export default {
     ProblemResult
   },
   props: {
+    contestId: Number,
     problems: Array,
     rows: Array
   },
