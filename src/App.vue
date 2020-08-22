@@ -5,7 +5,7 @@
       <b-loading :active.sync="$root.loading"></b-loading>
       <router-view v-if="!$root.loading" />
     </section>
-    <footer class="footer">
+    <footer class="footer" v-if="!$root.loading">
       <div class="content has-text-centered">
         <p>
           <strong>Codeforces Any</strong> by <a href="https://xlor.cn">XLor</a>.
