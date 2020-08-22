@@ -1,5 +1,20 @@
 <template>
-  <b-table :data="rows" default-sort="rank" default-sort-direction="asc">
+  <b-table
+    :columns="
+      rows.length === 0
+        ? [
+            { label: '#', centered: true, numeric: true, width: 24 },
+            { label: 'Handle' },
+            { label: '解决', centered: true, width: 72 },
+            { label: '罚时', centered: true, width: 100 }
+          ]
+        : []
+    "
+    :data="rows"
+    default-sort="rank"
+    default-sort-direction="asc"
+    :loading="loading"
+  >
     <template slot-scope="props">
       <b-table-column
         label="#"
@@ -57,9 +72,14 @@
       <section class="section">
         <div class="content has-text-grey has-text-centered">
           <p>
-            <b-icon icon="emoticon-sad" size="is-large"></b-icon>
+            <b-icon
+              v-if="!loading"
+              icon="emoticon-sad"
+              size="is-large"
+            ></b-icon>
+            <b-icon v-else icon="emoticon-happy" size="is-large"></b-icon>
           </p>
-          <p>无人参加本场比赛</p>
+          <p v-if="!loading">无人参加本场比赛</p>
         </div>
       </section>
     </template>
@@ -76,6 +96,7 @@ export default {
     ProblemResult
   },
   props: {
+    loading: Boolean,
     contestId: Number,
     problems: Array,
     rows: Array

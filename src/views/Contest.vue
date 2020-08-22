@@ -27,8 +27,9 @@
           >好友榜单</a
         >
       </p>
-      <p v-if="problems">
+      <p>
         <RankTable
+          :loading="problems === null"
           :contest-id="contestId"
           :problems="problems"
           :rows="rows"
