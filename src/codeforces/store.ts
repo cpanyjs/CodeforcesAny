@@ -1,7 +1,7 @@
 import localforage from 'localforage';
 
-import { getUser, getContestList } from './api';
-import { UserDTO, ContestDTO } from './type';
+import { getUser, getContestList, getHandlesContestRank } from './api';
+import { UserDTO, ContestDTO, ContestStandingsDTO } from './type';
 import { Member } from './member';
 
 const handleStore = localforage.createInstance({
@@ -82,6 +82,19 @@ export async function removeHandle(name: string, handle: string) {
   }
 }
 
-export function getContestById(id: number) {
-  return contestStore.get(id);
+export function getContestById(contestId: number) {
+  return contestStore.get(contestId);
+}
+
+export async function getContestRank(contestId: number) {
+  const handles = [...memberStore.values()]
+    .map(member => member.handles.map(handle => handle.handle))
+    .flat();
+  const result = await getHandlesContestRank(handles, contestId);
+  for (const row of result.rows) {
+    row.handle = await handleStore.getItem(row.party.members[0].handle);
+    // row.name =
+    row.party = undefined;
+  }
+  return result as ContestStandingsDTO;
 }

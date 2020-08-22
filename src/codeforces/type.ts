@@ -49,18 +49,20 @@ export enum ParticipantType {
   OUT_OF_COMPETITION = 'OUT_OF_COMPETITION'
 }
 
+export interface ProblemDTO {
+  contestId: number;
+  index: string;
+  name: string;
+  rating: number;
+  tags: string[];
+}
+
 export interface SubmissionDTO {
   id: number;
   contestId: number;
   creationTimeSeconds: number;
   relativeTimeSeconds: number;
-  problem: {
-    contestId: number;
-    index: string;
-    name: string;
-    rating: number;
-    tags: string[];
-  };
+  problem: ProblemDTO;
   author: {
     members: string[];
     participantType: ParticipantType;
@@ -85,6 +87,26 @@ export interface ContestDTO {
   phase: string; // enum: BEFORE, CODING, PENDING_SYSTEM_TEST, SYSTEM_TEST, FINISHED
   startTimeSeconds: number;
   durationSeconds: number;
+}
+
+export interface ProblemResultDTO {
+  points: number;
+  rejectedAttemptCount: number;
+  bestSubmissionTimeSeconds: number;
+}
+
+export interface RanklistRowDTO {
+  rank: number;
+  handle: HandleDTO;
+  name: string;
+  problemResults: ProblemResultDTO[];
+  penalty: number;
+}
+
+export interface ContestStandingsDTO {
+  contest: ContestDTO;
+  problems: ProblemDTO[];
+  rows: RanklistRowDTO[];
 }
 
 export interface ParticipateContest {

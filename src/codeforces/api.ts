@@ -77,3 +77,20 @@ export async function getGymContestList(): Promise<ContestDTO[]> {
   } = await api.get('contest.list?gym=true');
   return result as ContestDTO[];
 }
+
+export async function getHandlesContestRank(
+  handles: string[],
+  contestId: number,
+  showUnofficial?: true
+) {
+  const {
+    data: { result }
+  } = await api.get('contest.standings', {
+    params: {
+      contestId,
+      showUnofficial,
+      handles: handles.join(';')
+    }
+  });
+  return result;
+}

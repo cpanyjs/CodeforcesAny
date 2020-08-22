@@ -27,26 +27,38 @@
           >好友榜单</a
         >
       </p>
+      <p v-if="problems">
+        <RankTable :problems="problems" :rows="rows"></RankTable>
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import { getContestById } from '../codeforces/store';
+import { getContestById, getContestRank } from '../codeforces/store';
+import RankTable from '../components/tables/rankTable';
 
 export default {
   name: 'Contest',
+  components: {
+    RankTable
+  },
   props: {
     contestId: Number
   },
   data: () => ({
-    contest: null
+    contest: null,
+    problems: null,
+    rows: []
   }),
-  created() {
+  async created() {
     this.contest = getContestById(this.contestId);
     if (!this.contest || this.contest.phase === 'BEFORE') {
       this.$router.replace({ name: 'Home' });
     }
+    const result = await getContestRank(this.contestId);
+    this.problems = result.problems;
+    this.rows = result.rows;
   }
 };
 </script>
