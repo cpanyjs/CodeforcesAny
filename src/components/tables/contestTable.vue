@@ -26,11 +26,9 @@
         >
       </b-table-column>
       <b-table-column label="比赛">
-        <a
-          :href="`http://codeforces.com/contest/${props.row.contestId}`"
-          target="_blank"
-          rel="noopener noreferrer"
-          >{{ props.row.contestName }}</a
+        <router-link
+          :to="{ name: 'Contest', query: { id: props.row.contestId } }"
+          >{{ props.row.contestName }}</router-link
         >
       </b-table-column>
       <b-table-column field="rank" label="排名" width="100" numeric>
