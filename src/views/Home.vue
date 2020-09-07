@@ -25,7 +25,7 @@
                 {{ props.row.name }}
               </span>
             </b-table-column>
-            <b-table-column label="时间">{{
+            <b-table-column label="时间" width="150">{{
               props.row.startTimeSeconds | parseTime
             }}</b-table-column>
           </template>
