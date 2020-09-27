@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { addHandle, clearDB, removeHandle } from '../codeforces/store';
+import { addHandle, clearDB, removeHandle } from '@/codeforces/store';
 import { Member } from '@/codeforces/member';
 
 Vue.use(Vuex);
@@ -39,12 +39,12 @@ export default new Vuex.Store({
     removeMember(state, { name }: { name: string }) {
       const id = state.members.findIndex(value => value.name === name);
       if (id !== -1) {
-        state.handles.splice(id, 1);
+        state.members.splice(id, 1);
       }
     },
     updateMember(state, member: Member) {
       const id = state.members.findIndex(value => value.name === member.name);
-      if (id == -1) {
+      if (id === -1) {
         state.members.push(member);
       } else {
         state.members.splice(id, 1, member);
