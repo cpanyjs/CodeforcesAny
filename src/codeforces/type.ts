@@ -95,18 +95,27 @@ export interface ProblemResultDTO {
   bestSubmissionTimeSeconds: number;
 }
 
-export interface RanklistRowDTO {
+export interface PartyDTO {
+  members: Array<{ handle: string }>;
+  teamId?: number;
+  teamName?: string;
+}
+
+export interface RankListRowDTO {
   rank: number;
-  handle: HandleDTO;
+  teamName?: string;
+  teamId?: number;
+  handles: HandleDTO[];
   name: string;
   problemResults: ProblemResultDTO[];
   penalty: number;
+  party: PartyDTO;
 }
 
 export interface ContestStandingsDTO {
   contest: ContestDTO;
   problems: ProblemDTO[];
-  rows: RanklistRowDTO[];
+  rows: RankListRowDTO[];
 }
 
 export interface ParticipateContest {

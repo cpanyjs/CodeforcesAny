@@ -26,12 +26,36 @@
       >
         {{ props.row.rank }}</b-table-column
       >
-      <b-table-column label="Handle" style="line-height: 3;"
-        ><CodeforcesHandle
-          :handle="props.row.handle.handle"
-          :rating="props.row.handle.rating"
-        ></CodeforcesHandle
-      ></b-table-column>
+      <b-table-column label="Handle" style="line-height: 3;">
+        <div v-if="props.row.teamName">
+          <div style="line-height: 1.5">
+            <a
+              :href="`http://codeforces.com/team/${props.row.teamId}`"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ props.row.teamName }}</a
+            >
+          </div>
+          <div style="line-height: 1.5">
+            <CodeforcesHandle
+              v-for="handle in props.row.handles"
+              :key="handle.handle"
+              :handle="handle.handle"
+              :rating="handle.rating"
+              style="margin-right: 4px; font-size: 0.9em;"
+            ></CodeforcesHandle>
+          </div>
+        </div>
+        <div v-else>
+          <CodeforcesHandle
+            v-for="handle in props.row.handles"
+            :key="handle.handle"
+            :handle="handle.handle"
+            :rating="handle.rating"
+            style=""
+          ></CodeforcesHandle>
+        </div>
+      </b-table-column>
       <b-table-column
         label="解决"
         width="72"
