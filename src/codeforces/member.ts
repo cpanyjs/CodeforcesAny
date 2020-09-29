@@ -1,12 +1,12 @@
 import {
-  SubmissionDTO,
-  UserDTO,
-  RatingChangeDTO,
+  ContestDTO,
   HandleRating,
-  Verdict,
   ParticipantType,
   ParticipateContest,
-  ContestDTO
+  RatingChangeDTO,
+  SubmissionDTO,
+  UserDTO,
+  Verdict
 } from './type';
 import { getProblemID } from './utils';
 import { getContestById } from './store';
@@ -114,6 +114,7 @@ export class Member {
     );
     for (const sub of this.submissions) {
       if (
+        sub.author.participantType === ParticipantType.CONTESTANT ||
         sub.author.participantType === ParticipantType.VIRTUAL ||
         sub.author.participantType === ParticipantType.OUT_OF_COMPETITION
       ) {

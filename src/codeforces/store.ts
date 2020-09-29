@@ -1,6 +1,11 @@
 import localforage from 'localforage';
 
-import { getUser, getContestList, getHandlesContestRank } from './api';
+import {
+  getUser,
+  getContestList,
+  getHandlesContestRank,
+  getGymContestList
+} from './api';
 import { UserDTO, ContestDTO, ContestStandingsDTO, HandleDTO } from './type';
 import { Member } from './member';
 
@@ -32,6 +37,10 @@ export async function loadDB() {
     members.push(value);
   });
   for (const contest of await getContestList()) {
+    contests.push(contest);
+    contestStore.set(contest.id, contest);
+  }
+  for (const contest of await getGymContestList()) {
     contests.push(contest);
     contestStore.set(contest.id, contest);
   }
@@ -95,7 +104,6 @@ export async function getContestRank(contestId: number) {
     contestId
   );
   for (const row of result.rows) {
-    console.log(row);
     row.handles = (
       await Promise.all(
         row.party.members.map(

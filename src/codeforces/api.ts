@@ -74,7 +74,7 @@ export async function getContestList(): Promise<ContestDTO[]> {
 export async function getGymContestList(): Promise<ContestDTO[]> {
   const {
     data: { result }
-  } = await api.get('contest.list?gym=true');
+  } = await api.get('contest.list', { params: { gym: true } });
   return result as ContestDTO[];
 }
 
