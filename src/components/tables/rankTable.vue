@@ -47,12 +47,20 @@
           </div>
         </div>
         <div v-else>
+          <router-link
+            v-if="props.row.handles[0].name"
+            :to="{
+              name: 'Profile',
+              query: { name: props.row.handles[0].name }
+            }"
+            style="margin-right: 0.5em;"
+            >{{ props.row.handles[0].name }}</router-link
+          >
           <CodeforcesHandle
             v-for="handle in props.row.handles"
             :key="handle.handle"
             :handle="handle.handle"
             :rating="handle.rating"
-            style=""
           ></CodeforcesHandle>
         </div>
       </b-table-column>
