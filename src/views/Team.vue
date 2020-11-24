@@ -236,12 +236,10 @@ export default {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: Base64.encodeURI(
-            JSON.stringify({
-              body: arr.join('\n'),
-              lang: 'text'
-            })
-          )
+          body: JSON.stringify({
+            body: Base64.encodeURI(arr.join('\n')),
+            lang: 'text'
+          })
         })
       ).json();
       this.$buefy.notification.open({
