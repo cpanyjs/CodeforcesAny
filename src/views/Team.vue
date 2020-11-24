@@ -44,7 +44,7 @@
             :disabled="current !== null"
             type="is-success"
             icon-left="plus"
-            @click="addHanlde"
+            @click="addHandle"
           />
         </div>
         <div class="level-item">
@@ -178,7 +178,7 @@ export default {
       this.file = null;
       setTimeout(() => (this.current = null), 2000);
     },
-    addHanlde() {
+    addHandle() {
       this.$buefy.modal.open({
         parent: this,
         component: AddHandleForm,
