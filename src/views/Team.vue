@@ -16,14 +16,17 @@
               <span>更多操作</span>
               <b-icon icon="menu-down"></b-icon>
             </button>
-            <b-dropdown-item @click="showID ^= 1">{{
-              showID ? '隐藏序号' : '显示序号'
-            }}</b-dropdown-item>
+            <b-dropdown-item @click="showID ^= 1"
+              >{{ showID ? '隐藏序号' : '显示序号' }}
+            </b-dropdown-item>
             <b-dropdown-item @click="onToggleAction">隐藏操作</b-dropdown-item>
             <hr class="dropdown-divider" />
             <b-dropdown-item @click="onXLorPasteImport"
-              >从 XLorPaste 批量添加</b-dropdown-item
-            >
+              >从 XLorPaste 批量添加
+            </b-dropdown-item>
+            <b-dropdown-item @click="onXLorPasteExport"
+              >导出名单到 XLorPaste
+            </b-dropdown-item>
             <b-dropdown-item @click="onRefresh">刷新信息</b-dropdown-item>
             <b-dropdown-item @click="onClear">清空存储</b-dropdown-item>
           </b-dropdown>
@@ -34,8 +37,8 @@
             v-model="mode"
             true-value="Member"
             false-value="Handle"
-            >{{ mode === 'Member' ? '成员模式' : '账户模式' }}</b-switch
-          >
+            >{{ mode === 'Member' ? '成员模式' : '账户模式' }}
+          </b-switch>
         </div>
       </div>
       <div class="level-right">
@@ -74,8 +77,8 @@
 
     <div v-if="current !== null" style="margin-bottom: 1rem;">
       <b-progress type="is-success" show-value format="percent" :value="percent"
-        >{{ current }} - {{ percent }} %</b-progress
-      >
+        >{{ current }} - {{ percent }} %
+      </b-progress>
     </div>
 
     <component
@@ -218,6 +221,30 @@ export default {
             });
           }
         }
+      });
+    },
+    async onXLorPasteExport() {
+      const arr = [];
+      for (const [name, handle] of this.$store.getters.allNameHandle) {
+        arr.push(`${name},${handle}`);
+      }
+      const { token } = await (
+        await fetch('https://api.xlorpaste.cn/', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            body: arr.join('\n'),
+            lang: 'text'
+          })
+        })
+      ).json();
+      this.$buefy.notification.open({
+        message: `导出成功 Token ${token}`,
+        type: 'is-info',
+        indefinite: true
       });
     },
     onToggleAction() {
