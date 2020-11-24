@@ -233,9 +233,9 @@ export default {
         await fetch('https://api.xlorpaste.cn/', {
           method: 'POST',
           mode: 'no-cors',
-          headers: {
+          headers: new Headers({
             'Content-Type': 'application/json'
-          },
+          }),
           body: JSON.stringify({
             body: Base64.encodeURI(arr.join('\n')),
             lang: 'text'
