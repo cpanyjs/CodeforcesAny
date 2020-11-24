@@ -232,7 +232,7 @@ export default {
       const { token } = await (
         await fetch('https://api.xlorpaste.cn/', {
           method: 'POST',
-          mode: 'cors',
+          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json'
           },
