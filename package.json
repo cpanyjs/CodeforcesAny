@@ -13,6 +13,7 @@
     "chart.xkcd": "^1.1.13",
     "core-js": "^3.6.5",
     "dayjs": "^1.8.29",
+    "js-base64": "^3.6.0",
     "localforage": "^1.7.4",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.1",

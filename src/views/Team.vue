@@ -102,6 +102,7 @@
 </template>
 
 <script>
+import { Base64 } from 'js-base64';
 import HandleTable from '../components/tables/handleTable';
 import AddHandleForm from '../components/addHandle';
 import { sleep } from '../utils';
@@ -235,10 +236,12 @@ export default {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            body: arr.join('\n'),
-            lang: 'text'
-          })
+          body: Base64.encodeURI(
+            JSON.stringify({
+              body: arr.join('\n'),
+              lang: 'text'
+            })
+          )
         })
       ).json();
       this.$buefy.notification.open({
