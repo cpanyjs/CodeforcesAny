@@ -65,16 +65,28 @@ export async function getUser(handle: string, name: string): Promise<UserDTO> {
 }
 
 export async function getContestList(): Promise<ContestDTO[]> {
+  const Key = 'contest.list';
+  const cache = window.sessionStorage.getItem(Key);
+  if (cache) {
+    return JSON.parse(cache);
+  }
   const {
     data: { result }
   } = await api.get('contest.list');
+  window.sessionStorage.setItem(Key, JSON.stringify(result));
   return result as ContestDTO[];
 }
 
 export async function getGymContestList(): Promise<ContestDTO[]> {
+  const Key = 'contest.list.gym';
+  const cache = window.sessionStorage.getItem(Key);
+  if (cache) {
+    return JSON.parse(cache);
+  }
   const {
     data: { result }
   } = await api.get('contest.list', { params: { gym: true } });
+  window.sessionStorage.setItem(Key, JSON.stringify(result));
   return result as ContestDTO[];
 }
 
