@@ -21,37 +21,22 @@ const recentContestNum = 10;
 const contests: ContestDTO[] = [];
 
 export async function loadDB() {
-  let handles: UserDTO[] = [];
-  let members: Member[] = [];
+  const handles: UserDTO[] = [];
+  const members: Member[] = [];
 
-  const handlesCache = window.sessionStorage.getItem('handles');
-  const membersCache = window.sessionStorage.getItem('members');
-
-  if (handlesCache !== null && membersCache !== null) {
-    handles = JSON.parse(handlesCache);
-    members = JSON.parse(membersCache).map(
-      (member: Member) => new Member(member)
-    );
-    for (const member of members) {
-      memberStore.set(member.name, member);
+  await handleStore.iterate((value: UserDTO) => {
+    handles.push(value);
+    const name = value.name;
+    const member = new Member(value);
+    const srcMember = memberStore.get(name);
+    if (srcMember !== undefined && srcMember !== null) {
+      member.merge(srcMember);
     }
-  } else {
-    await handleStore.iterate((value: UserDTO) => {
-      handles.push(value);
-      const name = value.name;
-      const member = new Member(value);
-      const srcMember = memberStore.get(name);
-      if (srcMember !== undefined && srcMember !== null) {
-        member.merge(srcMember);
-      }
-      memberStore.set(name, member);
-    });
-    memberStore.forEach((value: Member) => {
-      members.push(value);
-    });
-    window.sessionStorage.setItem('handles', JSON.stringify(handles));
-    window.sessionStorage.setItem('members', JSON.stringify(members));
-  }
+    memberStore.set(name, member);
+  });
+  memberStore.forEach((value: Member) => {
+    members.push(value);
+  });
 
   for (const contest of await getContestList()) {
     contests.push(contest);
@@ -76,11 +61,6 @@ export function getRecentContests() {
     .slice(0, recentContestNum);
 }
 
-function removeSession() {
-  window.sessionStorage.removeItem('handles');
-  window.sessionStorage.removeItem('members');
-}
-
 export async function addHandle(
   name: string,
   handle: string
@@ -88,7 +68,6 @@ export async function addHandle(
   if (await handleStore.getItem(handle)) {
     return undefined;
   }
-  removeSession();
   const user = await getUser(handle, name);
   const member = new Member(user);
   const srcMember: Member | undefined = memberStore.get(name);
@@ -105,7 +84,6 @@ export async function removeHandle(name: string, handle: string) {
   if (member === undefined) {
     return undefined;
   }
-  removeSession();
   await handleStore.removeItem(handle);
   member.remove(handle);
   if (member.handles.length === 0) {
