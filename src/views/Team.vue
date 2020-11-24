@@ -230,17 +230,19 @@ export default {
         arr.push(`${name},${handle}`);
       }
       const { token } = await (
-        await fetch('https://api.xlorpaste.cn/', {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          }),
-          body: JSON.stringify({
-            body: Base64.encodeURI(arr.join('\n')),
-            lang: 'text'
+        await fetch(
+          new Request('https://api.xlorpaste.cn/', {
+            method: 'POST',
+            mode: 'cors',
+            headers: new Headers({
+              'Content-Type': 'application/json; charset=utf-8'
+            }),
+            body: JSON.stringify({
+              body: Base64.encodeURI(arr.join('\n')),
+              lang: 'text'
+            })
           })
-        })
+        )
       ).json();
       this.$buefy.notification.open({
         message: `导出成功 Token ${token}`,
