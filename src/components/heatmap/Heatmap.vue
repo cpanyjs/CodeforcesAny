@@ -20,49 +20,49 @@
     >
       <text
         class="vch__day__label"
-        :x="vertical ? SQUARE_SIZE : 0"
+        :x="vertical ? SQUARE_SIZE : 5"
         :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 8"
       >
         {{ lo.days[0] }}
       </text>
       <text
         class="vch__day__label"
-        :x="vertical ? SQUARE_SIZE : 0"
+        :x="vertical ? SQUARE_SIZE : 5"
         :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 20"
       >
         {{ lo.days[1] }}
       </text>
       <text
         class="vch__day__label"
-        :x="vertical ? SQUARE_SIZE : 0"
+        :x="vertical ? SQUARE_SIZE : 5"
         :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 32"
       >
         {{ lo.days[2] }}
       </text>
       <text
         class="vch__day__label"
-        :x="vertical ? SQUARE_SIZE * 3 : 0"
+        :x="vertical ? SQUARE_SIZE * 3 : 5"
         :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 44"
       >
         {{ lo.days[3] }}
       </text>
       <text
         class="vch__day__label"
-        :x="vertical ? SQUARE_SIZE * 3 : 0"
+        :x="vertical ? SQUARE_SIZE * 3 : 5"
         :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 56"
       >
         {{ lo.days[4] }}
       </text>
       <text
         class="vch__day__label"
-        :x="vertical ? SQUARE_SIZE * 5 : 0"
+        :x="vertical ? SQUARE_SIZE * 5 : 5"
         :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 68"
       >
         {{ lo.days[5] }}
       </text>
       <text
         class="vch__day__label"
-        :x="vertical ? SQUARE_SIZE * 5 : 0"
+        :x="vertical ? SQUARE_SIZE * 5 : 5"
         :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 80"
       >
         {{ lo.days[6] }}
@@ -74,7 +74,7 @@
       :transform="legendWrapperTransform[position]"
     >
       <text
-        :x="vertical ? SQUARE_SIZE * 1.25 : -25"
+        :x="vertical ? SQUARE_SIZE * 1.25 : -12"
         :y="vertical ? 8 : SQUARE_SIZE + 1"
       >
         {{ lo.less }}
@@ -339,12 +339,19 @@ svg.vch__wrapper {
 }
 
 svg.vch__wrapper .vch__months__labels__wrapper text.vch__month__label {
-  font-size: 10px;
+  font-weight: lighter;
+  font-size: 8px;
 }
 
 svg.vch__wrapper .vch__days__labels__wrapper text.vch__day__label,
 svg.vch__wrapper .vch__legend__wrapper text {
-  font-size: 9px;
+  font-weight: lighter;
+  font-size: 8px;
+}
+
+svg.vch__wrapper .vch__legend__wrapper text {
+  font-weight: lighter;
+  font-size: 8px;
 }
 
 svg.vch__wrapper .vch__months__labels__wrapper text.vch__month__label,
