@@ -128,7 +128,8 @@
 </template>
 
 <script>
-import { VTooltip } from 'v-tooltip';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { VTooltip } = require('@yjl9903/v-tooltip');
 import { CalendarHeatmap } from './calendar';
 import {
   DAYS_IN_WEEK,
