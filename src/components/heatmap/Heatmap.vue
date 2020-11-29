@@ -287,10 +287,13 @@ export default {
     tooltipOptions(day) {
       if (this.tooltip) {
         if (day.value !== null) {
+          const formatDate = day => {
+            return `${day.year()} 年 ${day.month() + 1} 月 ${day.date()} 日`;
+          };
           return {
-            content: `<b>${day.value} ${this.tooltipUnit}</b> ${this.lo.on} ${
-              this.lo.months[day.date.month()]
-            } ${day.date.date()}, ${day.date.year()}`,
+            content: `<b>${day.value} ${this.tooltipUnit}</b> ${
+              this.lo.on
+            } ${formatDate(day.date)}`,
             delay: { show: 150, hide: 50 }
           };
         } else if (this.noDataText) {
