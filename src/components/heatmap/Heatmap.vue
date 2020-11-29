@@ -128,7 +128,7 @@
 </template>
 
 <script>
-import { VTooltip } from '@yjl9903/v-tooltip';
+import { VTooltip } from 'v-tooltip';
 import { CalendarHeatmap } from './calendar';
 import {
   DAYS_IN_WEEK,
