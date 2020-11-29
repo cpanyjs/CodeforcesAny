@@ -35,9 +35,10 @@ export class CalendarHeatmap {
     this.activities = data.reduce(
       (newValues: Record<string, CalendarHeatmapData>, { date, value }) => {
         const key = dayjs(date).format('YYYY-MM-DD');
+        value += newValues[key]?.value ?? 0;
         newValues[key] = {
           date,
-          value: (newValues[key]?.value ?? 0) + value,
+          value,
           colorIndex: this.getColorIndex(value)
         };
         return newValues;
@@ -95,7 +96,7 @@ export class CalendarHeatmap {
     } else if (value >= this.max) {
       return 4;
     } else {
-      return Math.min(Math.ceil(((value * 100) / this.max) * 0.03) + 1, 4);
+      return Math.min(Math.ceil(((value * 100) / this.max) * 0.03), 4);
     }
   }
 

@@ -2376,13 +2376,6 @@ cache-loader@^4.1.0:
     neo-async "^2.6.1"
     schema-utils "^2.0.0"
 
-cal-heatmap@^3.6.2:
-  version "3.6.2"
-  resolved "https://registry.yarnpkg.com/cal-heatmap/-/cal-heatmap-3.6.2.tgz#961a7f4686b3bdcf7104d951b6ff1dd58c0c62d1"
-  integrity sha1-lhp/Roazvc9xBNlRtv8d1YwMYtE=
-  dependencies:
-    d3 "^3.0.6"
-
 call-me-maybe@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/call-me-maybe/-/call-me-maybe-1.0.1.tgz#26d208ea89e37b5cbde60250a15f031c16a4d66b"
@@ -3272,11 +3265,6 @@ d3-shape@^1.3.7:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/d3-time/-/d3-time-2.0.0.tgz#ad7c127d17c67bd57a4c61f3eaecb81108b1e0ab"
   integrity sha512-2mvhstTFcMvwStWd9Tj3e6CEqtOivtD8AUiHT8ido/xmzrI9ijrUUihZ6nHuf/vsScRBonagOdj0Vv+SEL5G3Q==
-
-d3@^3.0.6:
-  version "3.5.17"
-  resolved "https://registry.yarnpkg.com/d3/-/d3-3.5.17.tgz#bc46748004378b21a360c9fc7cf5231790762fb8"
-  integrity sha1-vEZ0gAQ3iyGjYMn8fPUjF5B2L7g=
 
 dashdash@^1.12.0:
   version "1.14.1"

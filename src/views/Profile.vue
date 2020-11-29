@@ -49,14 +49,9 @@
             class="is-size-4 has-text-weight-bold has-text-centered"
             style="margin-bottom: 0.5em"
           >
-            频率
+            通过频率
           </h3>
-          <div
-            ref="heatmap"
-            id="heatmap"
-            class="is-flex"
-            style="justify-content: center"
-          ></div>
+          <CalendarHeatmap :data="heatmapSourceData" :max="5"></CalendarHeatmap>
         </div>
       </div>
 
@@ -82,17 +77,18 @@
 </template>
 
 <script>
-import CalHeatMap from 'cal-heatmap';
 import { Pie, positionType } from '../plugins/chart';
 import SolvedTable from '../components/tables/solvedTable';
 import ContestTable from '../components/tables/contestTable';
+import { CalendarHeatmap } from '../components/heatmap';
 import dayjs from 'dayjs';
 
 export default {
   name: 'Profile',
   components: {
     SolvedTable,
-    ContestTable
+    ContestTable,
+    CalendarHeatmap
   },
   props: {
     name: String,
@@ -115,6 +111,12 @@ export default {
       } else {
         return [];
       }
+    },
+    heatmapSourceData() {
+      return this.submissions.map(({ creationTimeSeconds }) => ({
+        date: dayjs(creationTimeSeconds * 1000).format('YYYY-MM-DD'),
+        value: 1
+      }));
     }
   },
   filters: {
@@ -163,61 +165,6 @@ export default {
           '#9179c0',
           '#949494'
         ]
-      });
-      const lastYear = dayjs()
-        .subtract(1, 'year')
-        .add(1, 'month')
-        .date(1)
-        .hour(0)
-        .minute(0)
-        .second(0)
-        .millisecond(0)
-        .toDate();
-      const cal = new CalHeatMap();
-      cal.init({
-        itemSelector: '#heatmap',
-        data: (() => {
-          const result = {};
-          for (const submission of this.submissions) {
-            const time = submission.creationTimeSeconds;
-            if (result[time] === undefined) {
-              result[time] = 1;
-            } else {
-              result[time] = 1 + result[time];
-            }
-          }
-          return result;
-        })(),
-        domain: 'month',
-        subDomain: 'day',
-        cellSize: 15,
-        start: lastYear,
-        range: 12,
-        displayLegend: false,
-        considerMissingDataAsZero: true,
-        legendColors: {
-          min: 'rgb(155,233,168)',
-          max: 'rgb(33,110,57)',
-          empty: 'rgb(235,237,240)',
-          base: 'rgb(235,237,240)'
-        },
-        domainLabelFormat(x) {
-          const month = dayjs(x).month();
-          return [
-            '一月',
-            '二月',
-            '三月',
-            '四月',
-            '五月',
-            '六月',
-            '七月',
-            '八月',
-            '九月',
-            '十月',
-            '十一月',
-            '十二月'
-          ][month];
-        }
       });
     });
   }
