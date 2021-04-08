@@ -106,6 +106,7 @@ import { Base64 } from 'js-base64';
 import HandleTable from '../components/tables/handleTable';
 import AddHandleForm from '../components/addHandle';
 import { sleep } from '../utils';
+import { MultiAddSleepTime } from '../constants';
 import { filterAC, filterContest } from '../codeforces/utils';
 
 function parseCSV(text) {
@@ -176,7 +177,7 @@ export default {
           });
         }
         this.percent = Number(((++cnt / data.length) * 100.0).toFixed(2));
-        await sleep(500);
+        await sleep(MultiAddSleepTime);
       }
       this.current = '完成';
       this.file = null;
