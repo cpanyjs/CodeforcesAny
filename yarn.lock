@@ -1311,7 +1311,7 @@
   resolved "https://registry.yarnpkg.com/@vue/cli-overlay/-/cli-overlay-4.5.12.tgz#d5ae353abb187672204197dcd077a4367d4d4a24"
   integrity sha512-dCN0RzVpA8fp+MfjuVBROgM483MPObAb/je+APE/JhpCJyPQORYQEvNpmaorpN+9Cp6mrESVSzhh0qD4SFrlzg==
 
-"@vue/cli-plugin-babel@^4.4.0":
+"@vue/cli-plugin-babel@^4.5.12":
   version "4.5.12"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-babel/-/cli-plugin-babel-4.5.12.tgz#c9737d4079485ce9be07c463c81e1e33886c6219"
   integrity sha512-PhiNDhlGydsRR0F00OJqG/Q3Mz2G1ko8XqS7CJ0l1GVVGmklUEBy2dW/S8ntEgHpSkFa6h49PgYP3WE2OM3CEg==
@@ -1324,7 +1324,7 @@
     thread-loader "^2.1.3"
     webpack "^4.0.0"
 
-"@vue/cli-plugin-eslint@^4.4.0":
+"@vue/cli-plugin-eslint@^4.5.12":
   version "4.5.12"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-eslint/-/cli-plugin-eslint-4.5.12.tgz#7fc2a1d0a490fa300ef4e94518c2cc49ba7a292f"
   integrity sha512-nbjGJkWxo/xdD32DwvnEAUwkWYsObpqNk9NuU7T62ehdzHPzz58o3j03YZ7a7T7Le8bYyOWMYsdNfz63F+XiZQ==
@@ -1336,14 +1336,14 @@
     webpack "^4.0.0"
     yorkie "^2.0.0"
 
-"@vue/cli-plugin-router@^4.4.0", "@vue/cli-plugin-router@^4.5.12":
+"@vue/cli-plugin-router@^4.5.12":
   version "4.5.12"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-router/-/cli-plugin-router-4.5.12.tgz#977c4b2b694cc03e9ef816112a5d58923493d0ac"
   integrity sha512-DYNz5AA3W7Ewt3aaiOLGdYFt4MX4w/HTEtep+kPzP9S9tAknzyoIJXkaYzhwu8ArpEYwhWgtuCcDZ8hR6++DbA==
   dependencies:
     "@vue/cli-shared-utils" "^4.5.12"
 
-"@vue/cli-plugin-typescript@^4.4.0":
+"@vue/cli-plugin-typescript@^4.5.12":
   version "4.5.12"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-typescript/-/cli-plugin-typescript-4.5.12.tgz#4186974541a0305e27e769370c981b86a44c2935"
   integrity sha512-ZTsmvaLHa/DBhqXfgiGkfJfz3tGUAWkRJiAkEAGJnj6X2pj7P47x9et/dkxPej/eVyxrSCtQs7Xt3bT9cMKJ3w==
@@ -1361,12 +1361,12 @@
   optionalDependencies:
     fork-ts-checker-webpack-plugin-v5 "npm:fork-ts-checker-webpack-plugin@^5.0.11"
 
-"@vue/cli-plugin-vuex@^4.4.0", "@vue/cli-plugin-vuex@^4.5.12":
+"@vue/cli-plugin-vuex@^4.5.12":
   version "4.5.12"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-vuex/-/cli-plugin-vuex-4.5.12.tgz#f7fbe177ee7176f055b546e9e74472f9d9177626"
   integrity sha512-STgbvNv/3iHAKArc18b/qjN7RX1FTrfxPeHH26GOr/A8lJes7+CSluZZ8E5R7Zr/vL0zOqOkUVDAjFXVf4zWQA==
 
-"@vue/cli-service@^4.4.0":
+"@vue/cli-service@^4.5.12":
   version "4.5.12"
   resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-4.5.12.tgz#483aef7dc4e2a7b02b7f224f0a2ef7cea910e033"
   integrity sha512-Di/dFw72HIvUrpTgnnPQkPq07mdd7z3GPeCH/o+6fv4bxOD+gwK9z7P6RkG4lGv2QdLz+qjim9f7xw5w+9ENkg==
@@ -2283,12 +2283,12 @@ browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.14.5, browserslist@^4
     escalade "^3.1.1"
     node-releases "^1.1.71"
 
-buefy@^0.8.20:
-  version "0.8.20"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.20.tgz#75708800548220654575903d031a81fc8575b7f3"
-  integrity sha512-pg8Cn0m9cjqp2/vaKT4VIfU8KIumuX/gAT1GtearXRs56+kKqAPx3j9O8cm9W6P4jPUCHajKX6H8AqD0ram2Bg==
+buefy@^0.9.7:
+  version "0.9.7"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.9.7.tgz#694e73fe0b32632a53d94c5ba9cfa4468363badd"
+  integrity sha512-Fli0ZjNDgtFtHm0LItWmfhNJ1oLjDwPzUWccvwXXoo2mADXaH8JQxyhY+drUuUV5/GMu5PtwqQSqPgZy942VZg==
   dependencies:
-    bulma "0.7.5"
+    bulma "0.9.2"
 
 buffer-from@^1.0.0:
   version "1.1.1"
@@ -2329,10 +2329,10 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
-bulma@0.7.5:
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.5.tgz#35066c37f82c088b68f94450be758fc00a967208"
-  integrity sha512-cX98TIn0I6sKba/DhW0FBjtaDpxTelU166pf7ICXpCCuplHWyu6C9LYZmL5PEsnePIeJaiorsTEzzNk3Tsm1hw==
+bulma@0.9.2:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.9.2.tgz#340011e119c605f19b8ca886bfea595f1deaf23c"
+  integrity sha512-e14EF+3VSZ488yL/lJH0tR8mFWiEQVCMi/BQUMi2TGMBOk+zrDg4wryuwm/+dRSHJw0gMawp2tsW7X1JYUCE3A==
 
 bytes@3.0.0:
   version "3.0.0"
@@ -5934,7 +5934,7 @@ loader-utils@^2.0.0:
     emojis-list "^3.0.0"
     json5 "^2.1.2"
 
-localforage@^1.7.4:
+localforage@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.9.0.tgz#f3e4d32a8300b362b4634cc4e066d9d00d2f09d1"
   integrity sha512-rR1oyNrKulpe+VM9cYmcFn6tsHuokyVHFaCM3+osEmxaHTbEk8oQu6eGDfS6DQLWi/N67XRmB8ECG37OES368g==
@@ -9425,7 +9425,7 @@ vue-resize@^0.4.5:
   resolved "https://registry.yarnpkg.com/vue-resize/-/vue-resize-0.4.5.tgz#4777a23042e3c05620d9cbda01c0b3cc5e32dcea"
   integrity sha512-bhP7MlgJQ8TIkZJXAfDf78uJO+mEI3CaLABLjv0WNzr4CcGRGPIAItyWYnP6LsPA4Oq0WE+suidNs6dgpO4RHg==
 
-vue-router@^3.2.0:
+vue-router@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.5.1.tgz#edf3cf4907952d1e0583e079237220c5ff6eb6c9"
   integrity sha512-RRQNLT8Mzr8z7eL4p7BtKvRaTSGdCbTy2+Mm5HTJvLGYSSeG9gDzNasJPP/yOYKLy+/cLG/ftrqq5fvkFwBJEw==
@@ -9451,12 +9451,12 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@^2.6.11:
+vue@^2.6.12:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
 
-vuex@^3.4.0:
+vuex@^3.6.2:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
   integrity sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==
