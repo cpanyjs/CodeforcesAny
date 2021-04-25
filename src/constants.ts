@@ -1,1 +1,1 @@
-export const MultiAddSleepTime = 1000;
+export const MultiAddSleepTime = 2000;

@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 
 import { addHandle, clearDB, removeHandle } from '@/codeforces/store';
 import { Member } from '@/codeforces/member';
+import { MultiAddSleepTime } from '@/constants';
+import { sleep } from '@/utils';
 
 Vue.use(Vuex);
 
@@ -58,12 +60,19 @@ export default new Vuex.Store({
   actions: {
     async addHandle(
       { commit },
-      { name, handle }: { name: string; handle: string }
+      {
+        name,
+        handle,
+        sleep: isSleep
+      }: { name: string; handle: string; sleep: boolean }
     ) {
       const result = await addHandle(name, handle);
       if (result) {
         commit('pushHandle', result[0]);
         commit('updateMember', result[1]);
+        if (isSleep) {
+          await sleep(MultiAddSleepTime);
+        }
       }
     },
     async removeHandle(

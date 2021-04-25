@@ -105,8 +105,6 @@
 import { Base64 } from 'js-base64';
 import HandleTable from '../components/tables/handleTable';
 import AddHandleForm from '../components/addHandle';
-import { sleep } from '../utils';
-import { MultiAddSleepTime } from '../constants';
 import { filterAC, filterContest } from '../codeforces/utils';
 
 function parseCSV(text) {
@@ -167,7 +165,11 @@ export default {
       for (const [name, handle] of data) {
         this.current = '正在查询 ' + handle;
         try {
-          await this.$store.dispatch('addHandle', { name, handle });
+          await this.$store.dispatch('addHandle', {
+            name,
+            handle,
+            sleep: true
+          });
         } catch (err) {
           this.$buefy.snackbar.open({
             message: `${handle} 查询失败！`,
@@ -177,7 +179,6 @@ export default {
           });
         }
         this.percent = Number(((++cnt / data.length) * 100.0).toFixed(2));
-        await sleep(MultiAddSleepTime);
       }
       this.current = '完成';
       this.file = null;
