@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@yjl9903/v-tooltip": "^0.0.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "buefy": "^0.8.20",
     "chart.xkcd": "^1.1.13",
     "core-js": "^3.6.5",
